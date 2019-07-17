@@ -1,0 +1,49 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from './views/Home.vue'
+import Approval from './views/Approval.vue'
+import Supervisor from './views/Supervisor.vue'
+import ApprovalUpdate from './views/ApprovalUpdate.vue'
+import ApprovalChange from './views/ApprovalChange.vue'
+import SupervisorTips from './views/SupervisorTips.vue'
+import HistoryMessage from './views/HistoryMesseage.vue'
+
+Vue.use(Router)
+
+export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/approval_todo',
+      name: 'approval_todo',
+      component: Approval
+    },
+    {
+      path: '/supervisor_item',
+      name: 'supervisor_item',
+      component: Supervisor
+    },{
+      path: '/approvalUpdate',
+      name: '/approvalUpdate',
+      component: ApprovalUpdate
+    },{
+      path: '/approvalChange',
+      name: 'change',
+      component: ApprovalChange
+    },{
+      path: '/supervisorTips',
+      name:'Tips',
+      component: SupervisorTips
+    },{
+      path: '/historyMessage',
+      name: 'historyMessage',
+      component: HistoryMessage
+    }
+  ]
+})
