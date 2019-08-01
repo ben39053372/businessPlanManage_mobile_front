@@ -3,16 +3,11 @@
     <div class="paper">
       <divider>進展更新</divider>
       <cell
+        :key="update.id"
+        v-for="update in getApprovalUpdateList"
         class="cell"
-        title="信息與數字化部3月份進展更新"
-        link="/approvalUpdate"
-        is-link
-        :border-intent="true"
-      />
-      <cell
-        class="cell"
-        title="信息與數字化部3月份進展更新"
-        link="/approvalUpdate"
+        :title="update.title"
+        :link="update.link"
         is-link
         :border-intent="true"
       />
@@ -20,14 +15,22 @@
 
     <div class="paper">
       <divider>計畫變更</divider>
-      <cell class="cell" title="項目管理系統計畫變更" link="/approvalChange" is-link :border-intent="false" />
-      <cell class="cell" title="項目管理系統計畫變更" link="/approvalChange" is-link :border-intent="false" />
+      <cell
+        :key="change.id"
+        v-for="change in getApprovalChangeList"
+        class="cell"
+        :title="change.title"
+        :link="change.link"
+        is-link
+        :border-intent="false"
+      />
     </div>
   </group>
 </template>
 
 <script>
 import { Cell, CellBox, Group, Grid, GridItem, Divider } from "vux";
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "ListItem",
   components: {
@@ -40,6 +43,10 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    ...mapState(["approvalUpdate", "approvalChange"]),
+    ...mapGetters(["getApprovalUpdateList",'getApprovalChangeList'])
   }
 };
 </script>

@@ -3,7 +3,7 @@
     <view-box>
       <router-view />
     </view-box>
-    <tabbar>
+    <tabbar v-model='index'>
       <tabbar-item link="/approval_todo">
         <img slot="icon" src="../src/assets/demo/icon_nav_button.png" />
         <span slot="label">審批待辦</span>
@@ -27,6 +27,11 @@ export default {
     TabbarItem,
     GroupTitle,
     ViewBox
+  },
+  data(){
+    return {
+      index: 0
+    }
   }
 };
 </script>

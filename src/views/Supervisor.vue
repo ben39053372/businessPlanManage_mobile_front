@@ -1,23 +1,23 @@
 <template>
   <div class="Supervisor">
-    <tab v-model="index">
+    <tab v-model="supervisorState">
       <tab-item v-for="(item,key) in list1" :key="key">{{item}}</tab-item>
     </tab>
     <group gutter='0'>
-      <cell :border-intent="false" link='/supervisorTips'>
+      <cell v-for='list in getSupervisorList' :key='list.id' :border-intent="false" link='/supervisorTips'>
         <img
           slot="icon"
           width="40"
           style="display:block;margin-right:5px;"
           src="../assets/logo.png"
         />
-        <cell-box slot='inline-desc' style='float:left' align-items='left'>
+        <cell-box  slot='inline-desc' style='float:left' align-items='left'>
             <!--name-->
-            自動駕駛示範運行計劃<br>
+            {{list.title}}<br>
             <!--date-->
-            2018/04/10<br>
+            {{list.date}}<br>
             <!--status-->
-            院長臨時交辦<br>
+            {{list.status}}<br>
         </cell-box>
       </cell>
     </group>
@@ -26,6 +26,7 @@
 
 <script>
 import { Tab, TabItem, Group, Cell, CellBox } from "vux";
+import { mapState, mapGetters } from 'vuex';
 export default {
   components: {
     Tab,
@@ -40,6 +41,18 @@ export default {
       demo1: "待辦",
       index: 0
     };
+  },
+  computed:{
+    ...mapState(['supervisorList']),
+    supervisorState:{
+      get(){
+        return this.$store.state.supervisorState
+      },
+      set(nextState){
+        this.$store.commit('setSupervisorState',nextState)
+      }
+    },
+    ...mapGetters(['getSupervisorList'])
   }
 };
 </script>

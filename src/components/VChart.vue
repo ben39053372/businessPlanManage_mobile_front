@@ -20,7 +20,7 @@ import {
   VTooltip,
   VLegend
 } from "vux";
-import { mapState, Store, mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     VChart,

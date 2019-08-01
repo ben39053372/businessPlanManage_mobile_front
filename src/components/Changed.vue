@@ -14,17 +14,11 @@
       gutter="0"
       style="padding-left:15px;background-color:rgb(131, 177, 238);"
     >
-      <cell title="更改1" align-items="flex-start">
+      <cell v-for="changelist in changedList" :key='changelist.key' :title='changelist.title' align-items="flex-start" >
         <p>
-          <s>xxxxxxxxxxxx</s>
+          <s>{{changelist.before}}</s>
         </p>
-        <p class="correct">yyyyyyyyyyyy</p>
-      </cell>
-      <cell title="更改2" align-items="flex-start">
-        <p>
-          <s>xxxxxxxxxxxx</s>
-        </p>
-        <p class="correct">yyyyyyyyyyyy</p>
+        <p class="correct">{{changelist.after}}</p>
       </cell>
     </group>
   </div>
@@ -32,7 +26,9 @@
 
 <script>
 import { Cell, Group } from "vux";
+import { mapState } from 'vuex';
 export default {
+  name:"index",
   components: {
     Cell,
     Group
@@ -41,7 +37,10 @@ export default {
     return {
       showContent001: false
     };
-  }
+  },
+  computed: {
+    ...mapState(['changedList'])
+  },
 };
 </script>
 
