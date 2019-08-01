@@ -2,13 +2,13 @@
   <div>
     <!--
     <cell
-      title="流程節點"
+      title="流程节点"
       :border-intent="false"
       :arrow-direction="showContent001 ? 'up' : 'down'"
       @click.native="showContent001 = !showContent001"
     ></cell>
     -->
-    <divider class="divider">流程節點</divider>
+    <divider class="divider">流程节点</divider>
     <flow class="flow" v-if="showContent001==false">
       <flow-state state="1" is-done></flow-state>
       <flow-line is-done></flow-line>
@@ -16,7 +16,7 @@
       <flow-state state="2" is-done>
         <span slot="title"></span>
       </flow-state>
-      <flow-line tip="進行中"></flow-line>
+      <flow-line tip="进行中"></flow-line>
       <flow-state state="3"></flow-state>
       <flow-line></flow-line>
 
@@ -52,7 +52,7 @@
           slot="content"
         >
           <flow-state state="1" title="流程一" is-done>
-            <cell class="cell-padding" slot="title" title="張三" inline-desc="234">
+            <cell class="cell-padding" slot="title" title="张三" inline-desc="234">
               <span style="padding:0 30px;">'2019-03-10 22:10:10'</span>
             </cell>
           </flow-state>
@@ -63,7 +63,7 @@
               <!--date-->
             </cell>
           </flow-state>
-          <flow-line tip="進行中"></flow-line>
+          <flow-line tip="进行中"></flow-line>
 
           <flow-state state="3" title="流程三">
             <cell class="cell-padding" slot="title" title="流程三" inline-desc="234">

@@ -20,8 +20,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/approval_todo',
-      name: 'approval_todo',
+      path: '/approval',
+      name: 'approval',
       component: Approval
     },
     {

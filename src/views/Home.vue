@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <div style="padding: 10px 25px;">
-      <h3>經營計畫完成概況</h3>
+      <h3>经营计画完成概况</h3>
       <button-tab v-model='chartState'>
-        <button-tab-item >當月統計</button-tab-item>
-        <button-tab-item selected>累計統計</button-tab-item>
-        <button-tab-item >部門完成率</button-tab-item>
+        <button-tab-item >当月统计</button-tab-item>
+        <button-tab-item selected>累计统计</button-tab-item>
+        <button-tab-item >部门完成率</button-tab-item>
       </button-tab>
     </div>
     <VChart />
@@ -14,25 +14,25 @@
         <div class="vux-1px-r">
           <span>{{productNum}}</span>
           <br />
-          <p>產品開發</p>
+          <p>产品开发</p>
         </div>
         <div class="vux-1px-r">
           <span>{{skillCreat}}</span>
           <br />
-          <p>技術創新</p>
+          <p>技术创新</p>
         </div>
         <div class="vux-1px-r">
           <span>{{manage}}</span>
           <br />
-          <p>經營管理</p>
+          <p>经营管理</p>
         </div>
       </div>
     </card>
     <grid class="grid" :show-lr-borders='false' :show-vertical-dividers='false  '>
-      <grid-item label="經營月報" class="grid">
+      <grid-item label="经营月报" class="grid">
         <img slot="icon" src="../assets/demo/grid_icon.png" />
       </grid-item>
-      <grid-item label="重點項目" class="grid">
+      <grid-item label="重点项目" class="grid">
         <img slot="icon" src="../assets/demo/grid_icon.png" />
       </grid-item>
     </grid>

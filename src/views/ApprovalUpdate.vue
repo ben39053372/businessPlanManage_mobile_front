@@ -1,27 +1,27 @@
 <template>
   <div>
-    <x-header :left-options="{backText: ''}">進展更新</x-header>
+    <x-header :left-options="{backText: ''}">进展更新</x-header>
     
-    <!-- 進展消息 -->
-    <group title="進展消息" gutter='0'>
+    <!-- 进展消息 -->
+    <group title="进展消息" gutter='0'>
       <img height="60" width="100%" src='../assets/6429eb68a3028f4bdb8218804af24457.jpg'/>
     </group>
 
 
-    <!-- 流程節點 -->
+    <!-- 流程节点 -->
     <FlowChart />
 
-    <!-- 審批意見 -->
+    <!-- 审批意见 -->
     <group style="margin=0">
-      <group-title slot="title" style="text-align:left">審批意見</group-title>
+      <group-title slot="title" style="text-align:left">审批意见</group-title>
       <x-textarea class="input" placeholder="请输入。。。" :max='30'></x-textarea>
     </group>
     <flexbox>
       <flexbox-item>
-        <x-button type="primary">通過</x-button>
+        <x-button type="primary">通过</x-button>
       </flexbox-item>
       <flexbox-item>
-        <x-button type="warn">拒絕</x-button>
+        <x-button type="warn">拒绝</x-button>
       </flexbox-item>
     </flexbox>
   </div>

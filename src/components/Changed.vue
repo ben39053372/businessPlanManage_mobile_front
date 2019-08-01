@@ -7,7 +7,7 @@
       :arrow-direction="showContent001 ? 'up' : 'down'"
       @click.native="showContent001 = !showContent001"
     >
-      <span slot="title" class="title">項目變更</span>
+      <span slot="title" class="title">项目变更</span>
     </cell>
     <group
       v-if="showContent001"

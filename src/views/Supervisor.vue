@@ -37,8 +37,8 @@ export default {
   },
   data() {
     return {
-      list1: ["正常推進", "關閉", "取消"],
-      demo1: "待辦",
+      list1: ["正常推进", "关闭", "取消"],
+      demo1: "待办",
       index: 0
     };
   },

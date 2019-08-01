@@ -1,7 +1,7 @@
 <template>
   <group gutter="0" style="height:100%">
     <div class="paper">
-      <divider>進展更新</divider>
+      <divider>进展更新</divider>
       <cell
         :key="update.id"
         v-for="update in getApprovalUpdateList"
@@ -14,7 +14,7 @@
     </div>
 
     <div class="paper">
-      <divider>計畫變更</divider>
+      <divider>计画变更</divider>
       <cell
         :key="change.id"
         v-for="change in getApprovalChangeList"

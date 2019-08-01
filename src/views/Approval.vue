@@ -3,6 +3,7 @@
     <tab v-model="approvalState">
       <tab-item v-for="(item,key) in list1" :key="key">{{item}}</tab-item>
     </tab>
+    <!-- Approval ListItem -->
     <ListItem />
   </div>
 </template>
@@ -19,7 +20,7 @@ export default {
   },
   data() {
     return {
-      list1: ["待辦", "跟蹤", "已辦"]
+      list1: ["待办", "跟踪", "已办"]
     };
   },
   computed: {

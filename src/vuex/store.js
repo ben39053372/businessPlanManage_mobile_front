@@ -6,26 +6,24 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     supervisorList:[
-      {title:'自動駕駛示範運行計劃',date:'2018/04/10',status:'院長臨時交辦',state:0},
-      {title:'自動駕駛示範運行計劃',date:'2018/04/10',status:'院長臨時交辦',state:1},
-      {title:'自動駕駛示範運行計劃',date:'2018/04/10',status:'院長臨時交辦',state:2},
+      {title:'自动驾驶示范运行计划',date:'2018/04/10',status:'院长临时交办',state:0},
+      {title:'自动驾驶示范运行计划',date:'2018/04/10',status:'院长临时交办',state:1},
+      {title:'自动驾驶示范运行计划',date:'2018/04/10',status:'院长临时交办',state:2},
     ],
     approvalUpdate: [
-      { title: '信息與數字化部3月份進展更新待辦', link: '/approvalUpdate', state: 0 },
-      { title: '信息與數字化部3月份進展更新跟蹤', link: '/approvalUpdate', state: 1 },
-      { title: '信息與數字化部3月份進展更新已辦', link: '/approvalUpdate', state: 2 },
+      { title: '信息与数字化部3月份进展更新待办', link: '/approvalUpdate', state: 0 },
+      { title: '信息与数字化部3月份进展更新跟踪', link: '/approvalUpdate', state: 1 },
+      { title: '信息与数字化部3月份进展更新已办', link: '/approvalUpdate', state: 2 },
     ],
-
     approvalChange: [
-      { title: '項目管理系統計畫變更待辦', link: '/approvalChange', state: 0 },
-      { title: '項目管理系統計畫變更跟蹤', link: '/approvalChange', state: 1 },
-      { title: '項目管理系統計畫變更已辦', link: '/approvalChange', state: 2 }
+      { title: '项目管理系统计画变更待办', link: '/approvalChange', state: 0 },
+      { title: '项目管理系统计画变更跟踪', link: '/approvalChange', state: 1 },
+      { title: '项目管理系统计画变更已办', link: '/approvalChange', state: 2 }
     ],
-
-    //變更事項
+    //变更事项
     changedList: [
-      { title: '更改事項', after: "xxxx", before: "yyyy" },
-      { title: '更改事項2', after: "xxxxxx", before: "yyyyyy" }
+      { title: '更改事项', after: "xxxx", before: "yyyy" },
+      { title: '更改事项2', after: "xxxxxx", before: "yyyyyy" }
     ],
     //Chart Data
     MouthChartData: [
@@ -39,10 +37,7 @@ export default new Vuex.Store({
       { year: "8日", sales: 483 },
       { year: "9日", sales: 585 },
       { year: "10日", sales: 385 },
-
-
     ],
-
     //Chart Data
     totalChartData: [
       { year: "1月", sales: 385 },
@@ -52,7 +47,6 @@ export default new Vuex.Store({
       { year: "5月", sales: 88 },
       { year: "6月", sales: 789 },
     ],
-
     //Chart Data
     departmentChartData: [
       { year: "1月", sales: 385 },
@@ -62,29 +56,16 @@ export default new Vuex.Store({
       { year: "5月", sales: 282 },
       { year: "6月", sales: 789 },
     ],
-
-    //產品開發
+    //产品开发
     productNum: 110,
-
-    //技術創新
+    //技术创新
     skillCreat: 20,
-
-    //經營管理
+    //经营管理
     manage: 50,
-
-    //待辦列表
-
-    //跟蹤列表
-
-    //已辦列表
-
-
-
     //UI用
     chartState: 0,
     approvalState: 0,
     supervisorState: 0,
-
   },
   mutations: {
     //UI用

@@ -4,17 +4,17 @@
       <router-view />
     </view-box>
     <tabbar v-model='index'>
-      <tabbar-item link="/approval_todo">
+      <tabbar-item link="/approval">
         <img slot="icon" src="../src/assets/demo/icon_nav_button.png" />
-        <span slot="label">審批待辦</span>
+        <span slot="label">审批待办</span>
       </tabbar-item>
       <tabbar-item selected link="/">
         <img slot="icon" src="../src/assets/demo/icon_nav_msg.png" />
-        <span slot="label">經營概況</span>
+        <span slot="label">经营概况</span>
       </tabbar-item>
       <tabbar-item link="/supervisor_item">
         <img slot="icon" src="../src/assets/demo/icon_nav_article.png" />
-        <span slot="label">督辦事項</span>
+        <span slot="label">督办事项</span>
       </tabbar-item>
     </tabbar>
   </div>

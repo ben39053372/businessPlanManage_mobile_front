@@ -8,7 +8,7 @@
       />
       <span align-items="flex-start">name</span>
       <span style="float:right">2018/04/10</span>
-      <br><span>加快臨時交辦</span>
+      <br><span>加快临时交办</span>
     </group>
   </div>
 </template>

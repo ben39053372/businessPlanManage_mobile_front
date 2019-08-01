@@ -1,27 +1,27 @@
 <template>
   <div>
-    <x-header :left-options="{backText: ''}">項目管理系統計畫變更</x-header>
-    <!-- 流程節點 -->
+    <x-header :left-options="{backText: ''}">项目管理系统计画变更</x-header>
+    <!-- 流程节点 -->
     <FlowChart />
 
-    <!-- 變更內容 -->
+    <!-- 变更内容 -->
     <Changed/>
 
-    <!-- 更多詳情 -->
+    <!-- 更多详情 -->
     <MoreDetail/>
 
-    <!-- 審批意見 -->
+    <!-- 审批意见 -->
     <div slot='bottom'>
       <group style="margin=0">
-        <group-title slot="title">審批意見</group-title>
+        <group-title slot="title">审批意见</group-title>
         <x-textarea class="input" placeholder="请输入。。。" :max='30'></x-textarea>
       </group>
       <flexbox>
         <flexbox-item>
-          <x-button type="primary">通過</x-button>
+          <x-button type="primary">通过</x-button>
         </flexbox-item>
         <flexbox-item>
-          <x-button type="warn">拒絕</x-button>
+          <x-button type="warn">拒绝</x-button>
         </flexbox-item>
       </flexbox>
     </div>
