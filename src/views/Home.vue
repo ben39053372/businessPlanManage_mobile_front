@@ -12,17 +12,17 @@
     <card :header="{title: '節點完成率'}" style="text-align:left;">
       <div slot="content" class="card-demo-flex card-demo-content01">
         <div class="vux-1px-r">
-          <span>{{productNum}}</span>
+          <span>{{getHomeData.productNum}}</span>
           <br />
           <p>产品开发</p>
         </div>
         <div class="vux-1px-r">
-          <span>{{skillCreat}}</span>
+          <span>{{getHomeData.skillCreat}}</span>
           <br />
           <p>技术创新</p>
         </div>
         <div class="vux-1px-r">
-          <span>{{manage}}</span>
+          <span>{{getHomeData.manage}}</span>
           <br />
           <p>经营管理</p>
         </div>
@@ -51,7 +51,7 @@ import {
   ViewBox
 } from "vux";
 import VChart from "../components/VChart";
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 export default {
   name: "home",
   components: {
@@ -70,7 +70,8 @@ export default {
     }
   },
   computed:{
-    ...mapState(['productNum','skillCreat','manage']),
+    ...mapGetters(["getHomeData"]),
+    //...mapState(['productNum','skillCreat','manage']),
     chartState:{
       get(){
         return this.$store.state.chartState

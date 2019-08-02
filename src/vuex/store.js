@@ -26,7 +26,7 @@ export default new Vuex.Store({
       { title: '更改事项2', after: "xxxxxx", before: "yyyyyy" }
     ],
     //Chart Data
-    MouthChartData: [
+    MonthChartData: [
       { year: "1", sales: 385 },
       { year: "2日", sales: 483 },
       { year: "3日", sales: 585 },
@@ -62,6 +62,24 @@ export default new Vuex.Store({
     skillCreat: 20,
     //经营管理
     manage: 50,
+
+    monthData:{
+      productNum: 110,
+      skillCreat: 20,
+      manage: 50,
+    },
+
+    totalData:{
+      productNum: 120,
+      skillCreat: 30,
+      manage: 60,
+    },
+    departmentData:{
+      productNum: 130,
+      skillCreat: 40,
+      manage: 70,
+    },
+
     //UI用
     chartState: 0,
     approvalState: 0,
@@ -87,11 +105,21 @@ export default new Vuex.Store({
     getChartData(state) {
       switch (state.chartState) {
         case 0:
-          return state.MouthChartData;
+          return state.MonthChartData;
         case 1:
           return state.totalChartData;
         case 2:
           return state.departmentChartData;
+      }
+    },
+    getHomeData(state){
+      switch(state.chartState) {
+        case 0:
+          return state.monthData;
+        case 1:
+          return state.totalData;
+        case 2: 
+          return state.departmentData;
       }
     },
     getApprovalUpdateList(state) {

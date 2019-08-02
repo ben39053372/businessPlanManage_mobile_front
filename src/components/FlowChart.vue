@@ -10,6 +10,7 @@
     -->
     <divider class="divider">流程节点</divider>
     <flow class="flow" v-if="showContent001==false">
+
       <flow-state state="1" is-done></flow-state>
       <flow-line is-done></flow-line>
 
@@ -41,6 +42,7 @@
       <flow-state state="13"></flow-state>
       <flow-line></flow-line>
       <flow-state state="14"></flow-state>
+
 
     </flow>
 
@@ -94,7 +96,8 @@ import { Card, Flow, FlowState, FlowLine, Cell, Grid, Divider } from "vux";
 export default {
   data() {
     return {
-      showContent001: false
+      showContent001: false,
+      flowTitle
     };
   },
   components: {

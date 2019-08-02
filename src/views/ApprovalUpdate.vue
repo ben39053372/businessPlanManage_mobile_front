@@ -7,7 +7,6 @@
       <img height="60" width="100%" src='../assets/6429eb68a3028f4bdb8218804af24457.jpg'/>
     </group>
 
-
     <!-- 流程节点 -->
     <FlowChart />
 
@@ -16,6 +15,8 @@
       <group-title slot="title" style="text-align:left">审批意见</group-title>
       <x-textarea class="input" placeholder="请输入。。。" :max='30'></x-textarea>
     </group>
+    
+    <!-- 通過拒絕-->
     <flexbox>
       <flexbox-item>
         <x-button type="primary">通过</x-button>
@@ -41,11 +42,6 @@ export default {
     FlowChart,
     XHeader
   },
-  data() {
-    return {
-      mouth: 3
-    };
-  }
 };
 </script>
 
