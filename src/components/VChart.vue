@@ -1,9 +1,11 @@
 <template>
-  <v-chart ref="demo" :data="getChartData">
-    <v-bar colors='rgba(49, 179, 240, 0.507)'/>
-    <v-line />
-    <v-tooltip :show-item-marker="false" />
-  </v-chart>
+  <div class="paper">
+    <v-chart ref="demo" :data="getChartData">
+      <v-bar colors="rgba(49, 179, 240, 0.507)" />
+      <v-line />
+      <v-tooltip :show-item-marker="false" />
+    </v-chart>
+  </div>
 </template>
 
 <script>

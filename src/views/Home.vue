@@ -2,44 +2,46 @@
   <div class="home">
     <div style="padding: 10px 25px;">
       <h3>经营计划完成概况</h3>
-      <button-tab v-model='chartState'>
-        <button-tab-item >当月统计</button-tab-item>
+      <button-tab v-model="chartState">
+        <button-tab-item>当月统计</button-tab-item>
         <button-tab-item selected>累计统计</button-tab-item>
-        <button-tab-item >部门完成率</button-tab-item>
+        <button-tab-item>部门完成率</button-tab-item>
       </button-tab>
     </div>
 
     <!-- 圖表 -->
     <VChart />
-     
+
     <!-- 節點完成率 -->
-    <card :header="{title: '節點完成率'}" style="text-align:left;">
-      <div slot="content" class="card-demo-flex card-demo-content01">
-        <div class="vux-1px-r">
-          <span>{{getHomeData.productNum}}%</span>
-          <br />
-          <p>产品开发</p>
+    <div class="paper">
+      <card :header="{title: '節點完成率'}" style="text-align:left;">
+        <div slot="content" class="card-demo-flex card-demo-content01">
+          <div class="vux-1px-r">
+            <span>{{getHomeData.productNum}}%</span>
+            <br />
+            <p>产品开发</p>
+          </div>
+          <div class="vux-1px-r">
+            <span>{{getHomeData.skillCreat}}%</span>
+            <br />
+            <p>技术创新</p>
+          </div>
+          <div class="vux-1px-r">
+            <span>{{getHomeData.manage}}%</span>
+            <br />
+            <p>经营管理</p>
+          </div>
         </div>
-        <div class="vux-1px-r">
-          <span>{{getHomeData.skillCreat}}%</span>
-          <br />
-          <p>技术创新</p>
-        </div>
-        <div class="vux-1px-r">
-          <span>{{getHomeData.manage}}%</span>
-          <br />
-          <p>经营管理</p>
-        </div>
-      </div>
-    </card>
-    <grid class="grid" :show-lr-borders='false' :show-vertical-dividers='true'>
-      <grid-item label="经营月报" class="grid">
-        <img slot="icon" src="../assets/icon/barchart.png" />
-      </grid-item>
-      <grid-item label="督办月报" class="grid">
-        <img slot="icon" src="../assets/icon/unorderedlist.png" />
-      </grid-item>
-    </grid>
+      </card>
+      <grid class="grid" :show-lr-borders="false" :show-vertical-dividers="true">
+        <grid-item label="经营月报" class="grid">
+          <img slot="icon" src="../assets/icon/barchart.png" />
+        </grid-item>
+        <grid-item label="督办月报" class="grid">
+          <img slot="icon" src="../assets/icon/unorderedlist.png" />
+        </grid-item>
+      </grid>
+    </div>
   </div>
 </template>
 
@@ -55,7 +57,7 @@ import {
   ViewBox
 } from "vux";
 import VChart from "../components/VChart";
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "home",
   components: {
@@ -69,22 +71,21 @@ export default {
     ViewBox,
     VChart
   },
-  data(){
-    return {
-    }
+  data() {
+    return {};
   },
-  computed:{
+  computed: {
     ...mapGetters(["getHomeData"]),
     //...mapState(['productNum','skillCreat','manage']),
-    chartState:{
-      get(){
-        return this.$store.state.chartState
+    chartState: {
+      get() {
+        return this.$store.state.chartState;
       },
-      set(nextState){
-        this.$store.commit('setChartState',nextState)
+      set(nextState) {
+        this.$store.commit("setChartState", nextState);
       }
     }
-  },
+  }
 };
 </script>
 

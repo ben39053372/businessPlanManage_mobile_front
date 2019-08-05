@@ -25,8 +25,8 @@ export default new Router({
       component: Approval
     },
     {
-      path: '/supervisor_item',
-      name: 'supervisor_item',
+      path: '/supervisor',
+      name: 'supervisor',
       component: Supervisor
     },{
       path: '/approvalUpdate',

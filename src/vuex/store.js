@@ -5,10 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    supervisorList:[
-      {title:'自动驾驶示范运行计划',date:'2018/04/10',status:'院长临时交办',state:0},
-      {title:'自动驾驶示范运行计划',date:'2018/04/10',status:'院长临时交办',state:1},
-      {title:'自动驾驶示范运行计划',date:'2018/04/10',status:'院长临时交办',state:2},
+    supervisorList: [
+      { title: '自动驾驶示范运行计划', date: '2018/04/10', status: '院长临时交办', state: 0 },
+      { title: '自动驾驶示范运行计划', date: '2018/04/10', status: '院长临时交办', state: 1 },
+      { title: '自动驾驶示范运行计划', date: '2018/04/10', status: '院长临时交办', state: 2 },
     ],
     approvalUpdate: [
       { title: '信息与数字化部3月份进展更新待办', link: '/approvalUpdate', state: 0 },
@@ -81,18 +81,29 @@ export default new Vuex.Store({
     //经营管理
     manage: 50,
 
-    monthData:{
+    supervisorTips: [
+      { title: '督辨事项', content: '' },
+      { title: '问题来源', content: '院督办公会' },
+      { title: '交办时间', content: '2019/4/25' },
+      { title: '问题描述', content: '2019' },
+      { title: '会议指示', content: '' },
+      { title: '责任单位', content: '' },
+      { title: '责任人', content: '' },
+      { title: '预计完成时间', content: '' }
+    ],
+
+    monthData: {
       productNum: 10,
       skillCreat: 20,
       manage: 50,
     },
 
-    totalData:{
+    totalData: {
       productNum: 20,
       skillCreat: 30,
       manage: 60,
     },
-    departmentData:{
+    departmentData: {
       productNum: 30,
       skillCreat: 40,
       manage: 70,
@@ -130,13 +141,13 @@ export default new Vuex.Store({
           return state.departmentChartData;
       }
     },
-    getHomeData(state){
-      switch(state.chartState) {
+    getHomeData(state) {
+      switch (state.chartState) {
         case 0:
           return state.monthData;
         case 1:
           return state.totalData;
-        case 2: 
+        case 2:
           return state.departmentData;
       }
     },
@@ -171,4 +182,4 @@ export default new Vuex.Store({
       }
     }
   }
-  })
+})

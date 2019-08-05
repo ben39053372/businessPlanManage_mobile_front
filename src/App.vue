@@ -12,7 +12,7 @@
         <img slot="icon" src="../src/assets/icon/user.png" />
         <span slot="label">经营概况</span>
       </tabbar-item>
-      <tabbar-item link="/supervisor_item">
+      <tabbar-item link="/supervisor">
         <img slot="icon" src="../src/assets/icon/file-exception.png" />
         <span slot="label">督办事项</span>
       </tabbar-item>
@@ -43,7 +43,7 @@ h4 {
 }
 .paper {
   background: #eeeeee;
-  padding:10px;
+  padding:8px;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
