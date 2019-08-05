@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='paper'>
     <cell
       style="background:#FFF;"
       is-link
@@ -9,10 +9,11 @@
     >
       <span slot="title" class="title">项目变更</span>
     </cell>
+    
     <group
       v-if="showContent001"
       gutter="0"
-      style="padding-left:15px;background-color:rgb(131, 177, 238);"
+      style="padding-left:15px;background-color:#04BE02;"
     >
       <cell v-for="changelist in changedList" :key='changelist.key' :title='changelist.title' align-items="flex-start" >
         <p>
@@ -58,7 +59,7 @@ p {
 }
 .title {
   font-weight: bold;
-  color: rgb(21, 66, 139);
+  color: #04BE02;
   font-size: 16px;
 }
 </style>

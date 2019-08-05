@@ -1,39 +1,46 @@
 <template>
   <group gutter="0" style="height:100%">
     <div class="paper">
-      <divider>进展更新</divider>
-      <cell
-        :key="update.id"
-        v-for="update in getApprovalUpdateList"
-        class="cell"
-        :title="update.title"
-        :link="update.link"
-        is-link
-        :border-intent="true"
-      />
+      <card>
+        <h4 slot="header">进展更新</h4>
+        <cell
+          slot="content"
+          :key="update.id"
+          v-for="update in getApprovalUpdateList"
+          class="cell"
+          :title="update.title"
+          :link="update.link"
+          is-link
+          :border-intent="true"
+        />
+      </card>
     </div>
 
     <div class="paper">
-      <divider>计画变更</divider>
-      <cell
-        :key="change.id"
-        v-for="change in getApprovalChangeList"
-        class="cell"
-        :title="change.title"
-        :link="change.link"
-        is-link
-        :border-intent="false"
-      />
+      <card>
+        <h4 slot="header">计画变更</h4>
+        <cell
+          slot="content"
+          :key="change.id"
+          v-for="change in getApprovalChangeList"
+          class="cell"
+          :title="change.title"
+          :link="change.link"
+          is-link
+          :border-intent="false"
+        />
+      </card>
     </div>
   </group>
 </template>
 
 <script>
-import { Cell, CellBox, Group, Grid, GridItem, Divider } from "vux";
+import { Card, Cell, CellBox, Group, Grid, GridItem, Divider } from "vux";
 import { mapState, mapGetters } from "vuex";
 export default {
   name: "ListItem",
   components: {
+    Card,
     Cell,
     CellBox,
     Group,
@@ -46,19 +53,17 @@ export default {
   },
   computed: {
     ...mapState(["approvalUpdate", "approvalChange"]),
-    ...mapGetters(["getApprovalUpdateList",'getApprovalChangeList'])
+    ...mapGetters(["getApprovalUpdateList", "getApprovalChangeList"])
   }
 };
 </script>
 
 <style scoped>
+
 .cell {
   background: #fff;
 }
-.paper {
-  background: #eeeeee;
-  padding: 7px;
-}
+
 .grid-center {
   display: block;
   text-align: center;

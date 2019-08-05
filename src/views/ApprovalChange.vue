@@ -11,30 +11,33 @@
     <MoreDetail/>
 
     <!-- 审批意见 -->
-    <div slot='bottom'>
-      <group style="margin=0">
-        <group-title slot="title">审批意见</group-title>
-        <x-textarea class="input" placeholder="请输入。。。" :max='30'></x-textarea>
-      </group>
-      <flexbox>
-        <flexbox-item>
-          <x-button type="primary">通过</x-button>
-        </flexbox-item>
-        <flexbox-item>
-          <x-button type="warn">拒绝</x-button>
-        </flexbox-item>
-      </flexbox>
+    <div class="paper">
+      <card>
+        <h4 slot="header">审批意见</h4>
+        <div slot="content">
+          <x-textarea class="input" placeholder="请输入。。。" :max="30"></x-textarea>
+          <flexbox>
+            <flexbox-item>
+              <x-button type="primary">通过</x-button>
+            </flexbox-item>
+            <flexbox-item>
+              <x-button type="warn">拒绝</x-button>
+            </flexbox-item>
+          </flexbox>
+        </div>
+      </card>
     </div>
   </div>
 </template>
 
 <script>
-import { Flexbox, FlexboxItem, XButton, Group, GroupTitle, XTextarea, XHeader } from "vux";
+import { Card, Flexbox, FlexboxItem, XButton, Group, GroupTitle, XTextarea, XHeader } from "vux";
 import FlowChart from "../components/FlowChart";
 import MoreDetail from "../components/MoreDetail";
 import Changed from '../components/Changed'
 export default {
   components: {
+    Card,
     Flexbox,
     FlexboxItem,
     XButton,

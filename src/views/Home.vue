@@ -1,39 +1,43 @@
 <template>
   <div class="home">
     <div style="padding: 10px 25px;">
-      <h3>经营计画完成概况</h3>
+      <h3>经营计划完成概况</h3>
       <button-tab v-model='chartState'>
         <button-tab-item >当月统计</button-tab-item>
         <button-tab-item selected>累计统计</button-tab-item>
         <button-tab-item >部门完成率</button-tab-item>
       </button-tab>
     </div>
+
+    <!-- 圖表 -->
     <VChart />
+     
+    <!-- 節點完成率 -->
     <card :header="{title: '節點完成率'}" style="text-align:left;">
       <div slot="content" class="card-demo-flex card-demo-content01">
         <div class="vux-1px-r">
-          <span>{{getHomeData.productNum}}</span>
+          <span>{{getHomeData.productNum}}%</span>
           <br />
           <p>产品开发</p>
         </div>
         <div class="vux-1px-r">
-          <span>{{getHomeData.skillCreat}}</span>
+          <span>{{getHomeData.skillCreat}}%</span>
           <br />
           <p>技术创新</p>
         </div>
         <div class="vux-1px-r">
-          <span>{{getHomeData.manage}}</span>
+          <span>{{getHomeData.manage}}%</span>
           <br />
           <p>经营管理</p>
         </div>
       </div>
     </card>
-    <grid class="grid" :show-lr-borders='false' :show-vertical-dividers='false  '>
+    <grid class="grid" :show-lr-borders='false' :show-vertical-dividers='true'>
       <grid-item label="经营月报" class="grid">
-        <img slot="icon" src="../assets/demo/grid_icon.png" />
+        <img slot="icon" src="../assets/icon/barchart.png" />
       </grid-item>
-      <grid-item label="重点项目" class="grid">
-        <img slot="icon" src="../assets/demo/grid_icon.png" />
+      <grid-item label="督办月报" class="grid">
+        <img slot="icon" src="../assets/icon/unorderedlist.png" />
       </grid-item>
     </grid>
   </div>

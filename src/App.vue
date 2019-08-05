@@ -5,15 +5,15 @@
     </view-box>
     <tabbar v-model='index'>
       <tabbar-item link="/approval">
-        <img slot="icon" src="../src/assets/demo/icon_nav_button.png" />
+        <img slot="icon" src='../src/assets/icon/piechart.png' />
         <span slot="label">审批待办</span>
       </tabbar-item>
       <tabbar-item selected link="/">
-        <img slot="icon" src="../src/assets/demo/icon_nav_msg.png" />
+        <img slot="icon" src="../src/assets/icon/user.png" />
         <span slot="label">经营概况</span>
       </tabbar-item>
       <tabbar-item link="/supervisor_item">
-        <img slot="icon" src="../src/assets/demo/icon_nav_article.png" />
+        <img slot="icon" src="../src/assets/icon/file-exception.png" />
         <span slot="label">督办事项</span>
       </tabbar-item>
     </tabbar>
@@ -26,7 +26,7 @@ export default {
     Tabbar,
     TabbarItem,
     GroupTitle,
-    ViewBox
+    ViewBox,
   },
   data(){
     return {
@@ -37,6 +37,14 @@ export default {
 </script>
 
 <style>
+h4 {
+  margin: 10px;
+  color: #04BE02;
+}
+.paper {
+  background: #eeeeee;
+  padding:10px;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
