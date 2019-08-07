@@ -48,6 +48,14 @@ export default {
     GridItem,
     Divider
   },
+  mounted(){
+    this.mount();
+  },
+  methods:{
+    mount(){
+      console.log('mounted approval')
+    }
+  },
   data() {
     return {};
   },

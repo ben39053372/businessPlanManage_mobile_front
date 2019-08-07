@@ -10,7 +10,7 @@
           v-for="list in getSupervisorList"
           :key="list.id"
           :border-intent="false"
-          link="/supervisorTips"
+          :link="list.link"
         >
           <img
             slot="icon"
@@ -37,7 +37,7 @@
 
 <script>
 import { Card, Tab, TabItem, Group, Cell, CellBox } from "vux";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   components: {
     Card,
@@ -47,12 +47,18 @@ export default {
     Cell,
     CellBox
   },
+  mounted(){
+    this.updateSupervisorList();
+  },
   data() {
     return {
-      list1: ["正常推进", "关闭", "取消"],
+      list1: ["正常推进","延期", "取消", "关闭","预关闭"],
       demo1: "待办",
       index: 0
     };
+  },
+  methods:{
+    ...mapActions(['updateSupervisorList'])
   },
   computed: {
     ...mapState(["supervisorList"]),

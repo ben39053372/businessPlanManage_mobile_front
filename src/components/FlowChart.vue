@@ -2,60 +2,47 @@
   <div class="paper">
     <card>
       <h4 slot="header">流程节点</h4>
-      <flow slot="content" class="flow" v-if="showContent001==false">
-        <flow-state state="1" is-done></flow-state>
-        <flow-line is-done></flow-line>
 
-        <flow-state state="2" is-done>
-          <span slot="title"></span>
-        </flow-state>
-        <flow-line tip="进行中"></flow-line>
-        <flow-state state="3"></flow-state>
-        <flow-line></flow-line>
-
-        <flow-state state="4"></flow-state>
-        <flow-line></flow-line>
-        <flow-state state="5"></flow-state>
-        <flow-line></flow-line>
-        <flow-state state="6"></flow-state>
-        <flow-line></flow-line>
+      <!-- 小流程圖 -->
+      <flow slot="content" v-if="!showContent001">
+        <template v-for="(i, index) in flowChart">
+          <flow-state :state="index + 1" :is-done="i.isDone" :key="'a1'+index"></flow-state>
+          <flow-line
+            v-if="index != (flowChart.length - 1)"
+            :is-done="i.lineDone"
+            :tip="i.tip ? i.tip : null"
+            :key="'a2'+index"
+          ></flow-line>
+        </template>
       </flow>
 
+      <!-- 大流程圖 -->
       <template slot="content" v-if="showContent001" id="box">
         <card id="scroll-box">
-          <flow
-            orientation="vertical"
-            style="height:250px;padding: 20px 70px;float:left;"
-            slot="content"
-          >
-            <flow-state state="1" title="流程一" is-done>
-              <cell class="cell-padding" slot="title" title="张三" inline-desc="234">
-                <span style="padding:0 30px;">'2019-03-10 22:10:10'</span>
-              </cell>
-            </flow-state>
-            <flow-line is-done></flow-line>
-
-            <flow-state state="2" title="流程二" is-done>
-              <cell class="cell-padding" slot="title" title="流程二" inline-desc="234">
-                <!--date-->
-              </cell>
-            </flow-state>
-            <flow-line tip="进行中"></flow-line>
-
-            <flow-state state="3" title="流程三">
-              <cell class="cell-padding" slot="title" title="流程三" inline-desc="234">
-                <!--date-->
-              </cell>
-            </flow-state>
-            <flow-line></flow-line>
-
-            <flow-state state="4" title="完成">
-              <cell class="cell-padding" slot="title" title="完成" inline-desc="234"></cell>
-            </flow-state>
+          <flow slot="content" style="padding: 50px 70px;float:left;" orientation="vertical">
+            <template v-for="(i, index) in flowChart">
+              <flow-state :state="index + 1" :title="(i.name)" :is-done="i.isDone" :key="'b1'+index">
+                <cell
+                  class="cell-padding"
+                  slot="title"
+                  :title="(i.name)"
+                  :inline-desc="(i.inline_desc)"
+                >
+                  <span style="padding:0 30px;">{{i.date}}</span>
+                </cell>
+              </flow-state>
+              <flow-line
+                v-if="index != (flowChart.length - 1)"
+                :is-done="i.lineDone"
+                :tip="i.tip ? i.tip : null"
+                :key="'b2'+index"
+                line-span='70px'
+              ></flow-line>
+            </template>
           </flow>
         </card>
       </template>
-      <div  slot="content" style="text-align:center">
+      <div slot="content" style="text-align:center">
         <div v-if="showContent001" style="margin:auto 0">
           <x-icon type="ios-arrow-up" size="30" @click.native="showContent001 = !showContent001"></x-icon>
         </div>
@@ -69,6 +56,7 @@
 
 <script>
 import { Card, Flow, FlowState, FlowLine, Cell, Grid, Divider } from "vux";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -83,6 +71,9 @@ export default {
     Cell,
     Grid,
     Divider
+  },
+  computed: {
+    ...mapState(["flowChart"])
   }
 };
 </script>

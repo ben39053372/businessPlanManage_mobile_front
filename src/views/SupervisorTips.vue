@@ -2,18 +2,28 @@
   <div>
     <h3>督办事项提示</h3>
     <div class="paper">
-      <ul v-for="(item,index) in supervisorTips" :key="index">
-        <li>{{item.title}}: {{item.content}}</li>
+      <ul>
+        <li v-for="(item,index) in data" :key="index">
+          <span style="color:#777">{{item.title}}</span>
+          :
+          <span style="font-size:18px">{{item.content}}</span>
+        </li>
       </ul>
     </div>
 
-    <div class='paper'>
+    <div class="paper">
       <card>
         <h4 slot="header">指示意见</h4>
-        <x-textarea class="textarea" name="description" placeholder="請輸入..." slot="content"></x-textarea>
+        <x-textarea
+          class="textarea"
+          name="description"
+          placeholder="請輸入..."
+          slot="content"
+          v-model="msg"
+        ></x-textarea>
         <flexbox slot="content">
           <flexbox-item>
-            <x-button type="primary">通过</x-button>
+            <x-button type="primary" @click.native="sendData">通过</x-button>
           </flexbox-item>
           <flexbox-item>
             <x-button type="primary" disabled>拒绝</x-button>
@@ -30,6 +40,8 @@
 <script>
 import { Card, Group, XTextarea, Flexbox, FlexboxItem, XButton } from "vux";
 import { mapState } from "vuex";
+import axios from "axios";
+const data = [];
 export default {
   components: {
     Card,
@@ -39,8 +51,79 @@ export default {
     FlexboxItem,
     XButton
   },
+  data() {
+    return {
+      data,
+      msg: "",
+      dutyPerson: "",
+      windowPerson: "",
+      problemNo: ""
+    };
+  },
+  mounted() {
+    this.getDataById();
+  },
   computed: {
-    ...mapState(["supervisorTips"])
+    ...mapState(["baseurl"])
+  },
+  methods: {
+    sendData() {
+      console.log('sendData')
+      axios.post(this.baseurl +"/superviseManageApp/saveIndicateMsg?id=" + this.$route.params.id,{
+            dutyPerson: this.dutyPerson,
+            windowPerson: this.windowPerson,
+            problemNo: this.problemNo,
+            auditMsg: this.msg
+      })
+        .then(res=>console.log(res))
+        .catch(err=>console.log(err))
+    },
+    getDataById() {
+      axios
+        .get(this.baseurl + "/app/superviseManageApp", {
+          params: {
+            id: this.$route.params.id
+          }
+        })
+        .then(res => {
+          console.log(res.data.data);
+          var json = res.data.data;
+          var dutyPerson = "";
+          for (var i = 0; i < json.dutyPerson.length; i++) {
+            dutyPerson += json.dutyPerson[i].label + json.dutyPerson[i].value;
+            if (i == json.dutyPerson.length - 1) {
+              dutyPerson += "/";
+            }
+          }
+          var windowPerson = "";
+          for (var i = 0; i < json.windowPerson.length; i++) {
+            dutyPerson +=
+              json.windowPerson[i].label + json.windowPerson[i].value;
+            if (i == json.windowPerson.length - 1 && i != 0) {
+              windowPerson += "/";
+            }
+          }
+          console.log("dutyPerson", dutyPerson);
+          this.data = [
+            { title: "问题来源", content: json.problemSource },
+            { title: "交办时间", content: json.assignTime },
+            { title: "问题/任务描述", content: json.problemDsc },
+            { title: "会议指示", content: json.meetingIndicate },
+            { title: "责任单位", content: json.dutyDept },
+            { title: "责任人", content: dutyPerson },
+            { title: "窗口人", content: windowPerson },
+            { title: "问题编号", content: json.problemNo },
+            { title: "纪要编号", content: json.summaryNo },
+            { title: "创建人", content: json.createPerson },
+            { title: "时间", content: json.createTime }
+          ];
+          this.dutyPerson = json.dutyPerson;
+          this.windowPerson = json.windowPerson;
+          this.problemNo = json.problemNo;
+          console.log("data:", this.data);
+        })
+        .catch(err=>console.log(err))
+    }
   }
 };
 </script>
@@ -50,13 +133,14 @@ h3 {
   text-align: center;
 }
 ul {
-  margin:0;
+  margin: 0;
   padding-left: 15px;
-  background: #FFF;
+  padding: 20px;
+  background: #fff;
 }
 .paper {
   background: #eeeeee;
-  padding:10px;
+  padding: 10px;
 }
 li {
   padding: 10px;

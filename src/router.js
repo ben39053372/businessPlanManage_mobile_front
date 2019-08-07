@@ -37,7 +37,7 @@ export default new Router({
       name: 'change',
       component: ApprovalChange
     },{
-      path: '/supervisorTips',
+      path: '/supervisorTips/:id',
       name:'Tips',
       component: SupervisorTips
     },{
