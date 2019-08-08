@@ -5,24 +5,24 @@ import axios from 'axios'
 Vue.use(Vuex)
 //const baseurl = 'http://rap2api.taobao.org/app/mock/227201/api'
 export default new Vuex.Store({
-  
+
   state: {
-    baseurl : 'http://rap2api.taobao.org/app/mock/227201/api',
+    baseurl: 'http://rap2api.taobao.org/app/mock/227201/api',
     supervisorList: [
       { "title": "自动驾驶示范运行计划", "date": "2018/04/10", "status": "院长临时交办", "state": 0 },
       { "title": "自动驾驶示范运行计划", "date": "2018/04/10", "status": "院长临时交办", "state": 1 },
       { "title": "自动驾驶示范运行计划", "date": "2018/04/10", "status": "院长临时交办", "state": 2 },
     ],
     approvalUpdate: [
-      { "title": "信息与数字化部3月份进展更新待办", "link": "/approvalUpdate", "state": 0 },
-      { "title": "信息与数字化部3月份进展更新跟踪", "link": "/approvalUpdate", "state": 1 },
-      { "title": "信息与数字化部3月份进展更新已办", "link": "/approvalUpdate", "state": 2 },
+      { "title": "信息与数字化部3月份进展更新待办", "link": "/approvalUpdate/1", "state": 0 },
+      { "title": "信息与数字化部3月份进展更新跟踪", "link": "/approvalUpdate/2", "state": 1 },
+      { "title": "信息与数字化部3月份进展更新已办", "link": "/approvalUpdate/3", "state": 2 },
 
     ],
     approvalChange: [
-      { "title": "项目管理系统计画变更待办", "link": "/approvalChange", "state": 0 },
-      { "title": "项目管理系统计画变更跟踪", "link": "/approvalChange", "state": 1 },
-      { "title": "项目管理系统计画变更已办", "link": "/approvalChange", "state": 2 },
+      { "title": "项目管理系统计画变更待办", "link": "/approvalChange/1", "state": 0 },
+      { "title": "项目管理系统计画变更跟踪", "link": "/approvalChange/2", "state": 1 },
+      { "title": "项目管理系统计画变更已办", "link": "/approvalChange/3", "state": 2 },
     ],
     //变更事项
     changedList: [
@@ -30,61 +30,11 @@ export default new Vuex.Store({
       { "title": "更改事项2", "after": "xxxxxx", "before": "yyyyyy" }
     ],
     //Chart Data
-    MonthChartData: [
-      { "year": "1", "sales": 385 },
-      { "year": "2日", "sales": 483 },
-      { "year": "3日", "sales": 585 },
-      { "year": "4日", "sales": 188 },
-      { "year": "5日", "sales": 282 },
-      { "year": "6日", "sales": 789 },
-      { "year": "7日", "sales": 385 },
-      { "year": "8日", "sales": 483 },
-      { "year": "9日", "sales": 585 },
-      { "year": "10日", "sales": 385 },
-    ],
+    MonthChartData: [],
     //Chart Data
-    totalChartData: [
-      { "year": "1月", "sales": 385 },
-      { "year": "2月", "sales": 585 },
-      { "year": "3月", "sales": 483 },
-      { "year": "4月", "sales": 2821 },
-      { "year": "5月", "sales": 88 },
-      { "year": "6月", "sales": 789 },
-    ],
+    totalChartData: [],
     //Chart Data
-    departmentChartData: [
-      { "year": "1月", "sales": 385 },
-      { "year": "2月", "sales": 483 },
-      { "year": "3月", "sales": 585 },
-      { "year": "4月", "sales": 188 },
-      { "year": "5月", "sales": 282 },
-      { "year": "6月", "sales": 789 },
-    ],
-    //产品开发
-    productNum: 110,
-    //技术创新
-    skillCreat: 20,
-    //经营管理
-    manage: 50,
-
-    
-
-    monthData: {
-      productNum: 10,
-      skillCreat: 20,
-      manage: 50,
-    },
-
-    totalData: {
-      productNum: 20,
-      skillCreat: 30,
-      manage: 60,
-    },
-    departmentData: {
-      productNum: 30,
-      skillCreat: 40,
-      manage: 70,
-    },
+    departmentChartData: [],
 
     flowChart: [
       { "name": "流程一", "isDone": true, "lineDone": true, "inline_desc": "123", "date": "1999/09/09" },
@@ -111,9 +61,12 @@ export default new Vuex.Store({
       state.supervisorState = nextState
     },
     setSupervisorList(state, nextState) {
-      console.log('setSupervisorList', nextState)
       state.supervisorList = nextState
-      console.log(state.supervisorList)
+    },
+    setMonthChartData(state, nextstate) {
+      console.log('setMonthChartData')
+      state.MonthChartData = nextstate
+      console.log(state.MonthChartData[0])
     }
   },
   actions: {
@@ -133,14 +86,13 @@ export default new Vuex.Store({
           for (var i = 0; i < json.length; i++) {
             var data = json[i].rows
             dataList = dataList.concat({
-              'title': data.meetingIndicate,
+              'title': data.problemDsc,
               'date': data.createTime,
-              'status': data.workProgress,
+              'status': data.newWorkProgress +'/'+ data.workProgress,
               'state': data.problemStatus,
               'id': data.id,
-              'link': '/supervisorTips/'+data.id
+              'link': '/supervisorTips/' + data.id
             })
-            //dataList.concat({'title':data.})
           }
           console.log(dataList)
           //mutation the state
@@ -228,9 +180,6 @@ export default new Vuex.Store({
           console.log(res)
         })
     },
-
-    //圖表
-
   },
   getters: {
     //use Chart State map Chart Data to Chart

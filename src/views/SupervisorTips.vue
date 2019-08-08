@@ -112,10 +112,8 @@ export default {
             { title: "责任单位", content: json.dutyDept },
             { title: "责任人", content: dutyPerson },
             { title: "窗口人", content: windowPerson },
-            { title: "问题编号", content: json.problemNo },
-            { title: "纪要编号", content: json.summaryNo },
-            { title: "创建人", content: json.createPerson },
-            { title: "时间", content: json.createTime }
+            { title: "推进计划", content: json.newAdvancePlan},
+            { title: "最近工作进展", content: json.newWorkProgress},
           ];
           this.dutyPerson = json.dutyPerson;
           this.windowPerson = json.windowPerson;

@@ -10,7 +10,7 @@
           v-for="list in getSupervisorList"
           :key="list.id"
           :border-intent="false"
-          :link="list.link"
+          :link="list.link" 
         >
           <img
             slot="icon"
@@ -78,5 +78,8 @@ export default {
 <style lang="less" scoped>
 .group-margin {
   margin-top: 0;
+}
+p{
+  margin: 0;
 }
 </style>

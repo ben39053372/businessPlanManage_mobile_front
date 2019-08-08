@@ -33,7 +33,7 @@ export default new Router({
       name: '/approvalUpdate',
       component: ApprovalUpdate
     },{
-      path: '/approvalChange',
+      path: '/approvalChange/:id',
       name: 'change',
       component: ApprovalChange
     },{

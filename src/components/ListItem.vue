@@ -18,7 +18,7 @@
 
     <div class="paper">
       <card>
-        <h4 slot="header">计画变更</h4>
+        <h4 slot="header">计划变更</h4>
         <cell
           slot="content"
           :key="change.id"

@@ -1,47 +1,32 @@
-<template>
-  <div class="paper">
-    <v-chart ref="demo" :data="getChartData">
-      <v-bar colors="rgba(49, 179, 240, 0.507)" />
-      <v-line />
-      <v-tooltip :show-item-marker="false" />
-    </v-chart>
+<template >
+  <div>
+    <template v-if="chartState==0"> <MonthVchart/> </template>
+    <template v-if="chartState==1"> <TotalVchart/> </template>
+    <template v-if="chartState==2"> <DeptVchart/> </template>
   </div>
 </template>
 
 <script>
-import {
-  VChart,
-  VLine,
-  VArea,
-  VPie,
-  VPoint,
-  VScale,
-  VBar,
-  VAxis,
-  VGuide,
-  VTooltip,
-  VLegend
-} from "vux";
+import MonthVchart from "./MonthVchart";
+import TotalVchart from "./TotalVchart";
+import DeptVchart from "./DeptVchart";
+import axios from "axios";
 import { mapState, mapGetters } from "vuex";
+import { async, delay } from "q";
+
+const data = [];
 export default {
   components: {
-    VChart,
-    VLine,
-    VArea,
-    VPie,
-    VBar,
-    VPoint,
-    VScale,
-    VAxis,
-    VGuide,
-    VTooltip,
-    VLegend
+    MonthVchart,
+    TotalVchart,
+    DeptVchart
   },
   computed: {
-    ...mapGetters(["getChartData"])
-  },
-  data() {
-    return {};
+    ...mapState(["chartState"])
   }
 };
 </script>
+
+<style>
+</style>
+
