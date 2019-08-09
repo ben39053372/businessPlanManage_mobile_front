@@ -4,9 +4,10 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 //const baseurl = 'http://rap2api.taobao.org/app/mock/227201/api'
-export default new Vuex.Store({
+const store =  new Vuex.Store({
 
   state: {
+    isLoading: true,
     baseurl: 'http://rap2api.taobao.org/app/mock/227201/api',
     supervisorList: [
       { "title": "自动驾驶示范运行计划", "date": "2018/04/10", "status": "院长临时交办", "state": 0 },
@@ -67,12 +68,17 @@ export default new Vuex.Store({
       console.log('setMonthChartData')
       state.MonthChartData = nextstate
       console.log(state.MonthChartData[0])
+    },
+    updateLoadingStatus (state, payload) {
+      state.isLoading = payload.isLoading
+      console.log('loading')
     }
   },
   actions: {
 
     //督办事项分页查询
     updateSupervisorList({ commit }) {
+      
       axios.get(this.state.baseurl + '/superviseManageApp/findSuperviseManage', {
         params: {
           page: 1,
@@ -239,3 +245,6 @@ export default new Vuex.Store({
     }
   }
 })
+
+
+export default store

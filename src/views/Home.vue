@@ -9,13 +9,13 @@
       </button-tab>
     </div>
 
-    <!-- 圖表 -->
+    <!-- 图表 -->
     <VChart />
     <!--<MonthVchart />-->
 
-    <!-- 節點完成率 -->
+    <!-- 节点完成率 -->
     <div class="paper">
-      <card :header="{title: '節點完成率'}" style="text-align:left;">
+      <card :header="{title: '节点完成率'}" style="text-align:left;">
         <div slot="content" class="card-demo-flex card-demo-content01">
           <div class="vux-1px-r">
             <span>{{productNum}}%</span>
@@ -81,6 +81,9 @@ export default {
   },
   methods:{
     fetchData(){
+      this.$vux.loading.show({
+        text: 'Loading'
+      })
       console.log(this.thismonth+1)
       axios.post(this.baseurl + '/app/portal/getALLCompletionData',{
         "startMonth":"1",
@@ -92,10 +95,11 @@ export default {
           var json = res.data.data
           console.log(json)
 
-          //節點完成率
+          //节点完成率
           this.productNum=json.nodeCompletion[0].completeProportion
           this.skillCreat=json.nodeCompletion[1].completeProportion
           this.manage=json.nodeCompletion[2].completeProportion
+          this.$vux.loading.hide()
         })
         .catch(err=>console.log(err))
     }

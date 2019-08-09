@@ -38,6 +38,9 @@ export default {
   },
   methods: {
     fetchData({ chart }) {
+      this.$vux.loading.show({
+        text: "Loading"
+      });
       var thismonth = new Date().getMonth();
       console.log(thismonth + 1);
       axios
@@ -85,6 +88,7 @@ export default {
             .color("name");
           chart.render();
           console.log("render");
+          this.$vux.loading.hide()
         })
         .catch(err => console.log(err));
     }

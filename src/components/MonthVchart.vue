@@ -1,5 +1,5 @@
 <template>
-  <v-chart id='1' prevent-render syncY="true" @on-render="fetchData"></v-chart>
+  <v-chart id="1" prevent-render syncY="true" @on-render="fetchData"></v-chart>
 </template>
 
 <script>
@@ -39,6 +39,9 @@ export default {
   },
   methods: {
     fetchData({ chart }) {
+      this.$vux.loading.show({
+        text: "Loading"
+      });
       var thismonth = new Date().getMonth();
       console.log(thismonth + 1);
       axios
@@ -112,9 +115,10 @@ export default {
           chart.legend("num3");
           chart.render();
           console.log("render");
+          this.$vux.loading.hide()
         })
         .catch(err => console.log(err));
-    },
+    }
   },
   computed: {
     ...mapState(["baseurl"])
