@@ -1,8 +1,6 @@
 <template>
   <div id="app" style="height:95%;">
-    
     <view-box>
-      <loading v-model="isLoading" text='Loading'></loading>
       <router-view />
     </view-box>
     <tabbar v-model='index'>
@@ -22,24 +20,18 @@
   </div>
 </template>
 <script>
-import { Loading,Tabbar, TabbarItem, GroupTitle, XHeader, ViewBox } from "vux";
-import { mapState } from 'vuex'
+import { Tabbar, TabbarItem, GroupTitle, XHeader, ViewBox } from "vux";
 export default {
   components: {
     Tabbar,
     TabbarItem,
     GroupTitle,
-    ViewBox,
+    ViewBox
   },
   data(){
     return {
       index: 0
     }
-  },
-  computed: {
-    ...mapState({
-      isLoading: state => state.isLoading
-    })
   }
 };
 </script>

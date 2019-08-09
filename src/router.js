@@ -12,7 +12,7 @@ import store from '../src/vuex/store'
 Vue.use(Router)
 
  
-const router = new Router({
+export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -31,11 +31,11 @@ const router = new Router({
       name: 'supervisor',
       component: Supervisor
     },{
-      path: '/approvalUpdate/:id',
+      path: '/approvalUpdate/:planDep/:month/:title',
       name: '/approvalUpdate',
       component: ApprovalUpdate
     },{
-      path: '/approvalChange/:id',
+      path: '/approvalChange/:id/:title',
       name: 'change',
       component: ApprovalChange
     },{
@@ -49,14 +49,3 @@ const router = new Router({
     }
   ]
 })
-
-router.beforeEach(function (to, from, next) {
-  store.commit('updateLoadingStatus', {isLoading: true})
-  next()
-})
-
-router.afterEach(function (to) {
-  store.commit('updateLoadingStatus', {isLoading: false})
-})
-
-export default router;

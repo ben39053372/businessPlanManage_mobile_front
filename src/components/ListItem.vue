@@ -36,7 +36,7 @@
 
 <script>
 import { Card, Cell, CellBox, Group, Grid, GridItem, Divider } from "vux";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   name: "ListItem",
   components: {
@@ -50,16 +50,20 @@ export default {
   },
   mounted(){
     this.mount();
+    this.updateApprovalUpdateList()
+    this.updateApprovalChangeList()
   },
   methods:{
     mount(){
       console.log('mounted approval')
-    }
+    },
+    ...mapActions(['updateApprovalUpdateList','updateApprovalChangeList']),
   },
   data() {
     return {};
   },
   computed: {
+    
     ...mapState(["approvalUpdate", "approvalChange"]),
     ...mapGetters(["getApprovalUpdateList", "getApprovalChangeList"])
   }

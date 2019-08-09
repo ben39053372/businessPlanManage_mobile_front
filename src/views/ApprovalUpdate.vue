@@ -2,15 +2,22 @@
   <div>
     <x-header :left-options="{backText: ''}">进展更新</x-header>
 
+    <div class='paper'>
+      <card>
+        <h2 slot='content'>{{$route.params.title}}</h2>
+      </card>
+      
+    </div>
+
     <!-- 进展消息 -->
     <div class="paper">
       <card>
         <h4 slot="header">进展消息</h4>
         <img
           slot="content"
-          height="60"
+          
           width="100%"
-          src="../assets/6429eb68a3028f4bdb8218804af24457.jpg"
+          :src="this.imgSrc"
         />
       </card>
     </div>
@@ -49,7 +56,9 @@ import {
   XTextarea,
   XHeader
 } from "vux";
+import axios from 'axios'
 import FlowChart from "../components/FlowChart";
+import { mapState } from 'vuex';
 export default {
   components: {
     Flexbox,
@@ -61,6 +70,28 @@ export default {
     XTextarea,
     FlowChart,
     XHeader
+  },
+  data(){
+    return {
+      imgSrc:'https://f11.baidu.com/it/u=2550844653,2528503954&fm=72'
+    }
+  },
+  mounted(){
+    this.fetchDataByPlanDeptAndMonth()
+  },
+  methods:{
+    fetchDataByPlanDeptAndMonth(){
+      axios.post(this.baseurl+'/app/progressReportApp/getFlowDetailAndFileUrl',{
+        planDeptValue: this.$route.params.planDep,
+        month: this.$route.params.month
+      })
+        .then(res=>{
+          console.log(res.data.data)
+        })
+    }
+  },
+  computed:{
+    ...mapState(['baseurl'])
   }
 };
 </script>
@@ -75,7 +106,11 @@ h3 {
   text-align: center;
   font-size: 15px;
 }
+h2{
+  margin: 14px;
+  font-size:18px;
+}
 .update-photo {
-  height: 200px;
+  
 }
 </style>
