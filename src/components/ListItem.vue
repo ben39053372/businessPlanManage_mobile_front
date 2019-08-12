@@ -63,7 +63,6 @@ export default {
     return {};
   },
   computed: {
-    
     ...mapState(["approvalUpdate", "approvalChange"]),
     ...mapGetters(["getApprovalUpdateList", "getApprovalChangeList"])
   }

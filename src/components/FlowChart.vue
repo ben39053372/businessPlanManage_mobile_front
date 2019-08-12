@@ -19,7 +19,7 @@
       <!-- 大流程圖 -->
       <template slot="content" v-if="showContent001" id="box">
         <card id="scroll-box">
-          <flow slot="content" style="padding: 50px 70px;float:left;" orientation="vertical">
+          <flow slot="content" style="padding: 50px 15px;float:left;" orientation="vertical">
             <template v-for="(i, index) in flowChart">
               <flow-state :state="index + 1" :title="(i.name)" :is-done="i.isDone" :key="'b1'+index">
                 <cell
@@ -42,6 +42,7 @@
           </flow>
         </card>
       </template>
+      <!--
       <div slot="content" style="text-align:center">
         <div v-if="showContent001" style="margin:auto 0">
           <x-icon type="ios-arrow-up" size="30" @click.native="showContent001 = !showContent001"></x-icon>
@@ -50,6 +51,7 @@
           <x-icon type="ios-arrow-down" size="30" @click.native="showContent001 = !showContent001"></x-icon>
         </div>
       </div>
+      -->
     </card>
   </div>
 </template>
@@ -57,11 +59,15 @@
 <script>
 import { Card, Flow, FlowState, FlowLine, Cell, Grid, Divider } from "vux";
 import { mapState } from "vuex";
+import { METHODS } from 'http';
 export default {
   data() {
     return {
-      showContent001: false
+      showContent001: true
     };
+  },
+  mounted(){
+    console.log('flowchartMount')
   },
   components: {
     Card,
@@ -74,7 +80,7 @@ export default {
   },
   computed: {
     ...mapState(["flowChart"])
-  }
+  },
 };
 </script>
 

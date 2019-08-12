@@ -7,7 +7,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
   state: {
-    isLoading: true,
+    moredetail:[
+      {title:'申请单号5',content:'JY-2019-001号'},
+      {title:'申请单号4',content:'JY-2019-0021号'},
+      {title:'申请单号3',content:'JY-2019-0031号'},
+      {title:'申请单号2',content:'JY-2019-0041号'},
+      {title:'申请单号1',content:'JY-2019-0051号'},
+    ],
     baseurl: 'http://rap2api.taobao.org/app/mock/227201/api',
     baseurl1: 'http://172.30.215.254:8080/',
     baseurl2: 'http://172.30.210.229:8080/',
@@ -33,7 +39,7 @@ export default new Vuex.Store({
 
     flowChart: [
       { "name": "流程一", "isDone": true, "lineDone": true, "inline_desc": "123", "date": "1999/09/09" },
-      { "name": "流程二", "isDone": true, "lineDone": false, "inline_desc": "123", "date": "1999/09/09", "tip": "進行中" },
+      { "name": "流程二", "isDone": true, "lineDone": false, "inline_desc": "123", "date": "1999/09/09" },
       { "name": "流程三", "isDone": false, "lineDone": false, "inline_desc": "123", "date": "1999/09/09" },
       { "name": "流程四", "isDone": false, "lineDone": false, "inline_desc": "123", "date": "1999/09/09" },
       { "name": "完成", "isDone": false, "lineDone": false, "date": "1999/09/09" },
@@ -72,82 +78,20 @@ export default new Vuex.Store({
     updateLoadingStatus(state, payload) {
       state.isLoading = payload.isLoading
       console.log('loading')
+    },
+    setFlowChart(state,nextState){
+      console.log('setFlowChart')
+      state.flowChart = nextState
+      console.log(state.flowChart)
+    },
+    setMoreDetail(state,nextState){
+      state.moredetail = nextState
+    },
+    setChange(state,nextState){
+      state.changedList = nextState
     }
   },
   actions: {
-
-    //督办事项分页查询
-    updateSupervisorList({ commit }) {
-
-      axios.get(this.state.baseurl + '/superviseManageApp/findSuperviseManage', {
-        params: {
-          page: 1,
-          size: 10
-        }
-      })
-        .then((res) => {
-          var json = res.data.data
-          console.log('updateSupervisorList', res.data.data)
-          var dataList = []
-          for (var i = 0; i < json.length; i++) {
-            var data = json[i].rows
-            dataList = dataList.concat({
-              'title': data.problemDsc,
-              'date': data.createTime,
-              'status': data.newWorkProgress + '/' + data.workProgress,
-              'state': data.problemStatus,
-              'id': data.id,
-              'link': '/supervisorTips/' + data.id
-            })
-          }
-          console.log(dataList)
-          //mutation the state
-          commit('setSupervisorList', dataList)
-        })
-        .catch((err) => (
-          console.log(err)
-        ))
-    },
-
-    //根据id查询审核督办事项
-    updateSupervisorListById(id) {
-      axios.get(this.state.baseurl + '/app/superviseManageApp', {
-        params: {
-          id: id
-        }
-      })
-    },
-
-    //添加指示意见
-    sendIndicateMsg(id) {
-      let data = {
-        "id": 467,
-        "dutyPerson": [
-          {
-            "label": "刘明月",
-            "value": "gz04026"
-          }
-        ],
-        "windowPerson": [
-          {
-            "label": "李智慧",
-            "value": "gz04853"
-          },
-          {
-            "label": "刘明月",
-            "value": "gz04026"
-          }
-        ],
-        "problemNo": "YB-20190725-0002",
-        "auditMsg": "发送GV富商大贾讽德诵功"
-      }
-      axios.post(this.state.baseurl + '/superviseManageApp/saveIndicateMsg?id=' + id, {
-        data
-      })
-        .then(res => {
-          console.log(res)
-        })
-    },
 
     //计划变更审批查看  
     updateApprovalChange(id) {
@@ -346,7 +290,7 @@ export default new Vuex.Store({
           return state.supervisorList.filter(change => change.state == 3)
         case 4:
           return state.supervisorList.filter(change => change.state == 4)
-      }
+      }this.$vux.loading.hide()
     }
   }
 })

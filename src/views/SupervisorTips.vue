@@ -68,17 +68,36 @@ export default {
   },
   methods: {
     sendData() {
-      console.log('sendData')
-      axios.post(this.baseurl +"/superviseManageApp/saveIndicateMsg?id=" + this.$route.params.id,{
+      console.log("sendData");
+      this.$vux.loading.show({
+        text: "Loading"
+      });
+      axios
+        .post(
+          this.baseurl +
+            "/superviseManageApp/saveIndicateMsg?id=" +
+            this.$route.params.id,
+          {
             dutyPerson: this.dutyPerson,
             windowPerson: this.windowPerson,
             problemNo: this.problemNo,
             auditMsg: this.msg
-      })
-        .then(res=>console.log(res))
-        .catch(err=>console.log(err))
+          }
+        )
+        .then(res => {
+          console.log(res)
+          this.$vux.loading.hide()
+        })
+        .catch(err => console.log(err));
+      this.$vux.alert.show({
+        title: this.msg,
+        content: "成功發送!"
+      });
     },
     getDataById() {
+      this.$vux.loading.show({
+        text: "Loading"
+      });
       axios
         .get(this.baseurl + "/app/superviseManageApp", {
           params: {
@@ -112,15 +131,16 @@ export default {
             { title: "责任单位", content: json.dutyDept },
             { title: "责任人", content: dutyPerson },
             { title: "窗口人", content: windowPerson },
-            { title: "推进计划", content: json.newAdvancePlan},
-            { title: "最近工作进展", content: json.newWorkProgress},
+            { title: "推进计划", content: json.newAdvancePlan },
+            { title: "最近工作进展", content: json.newWorkProgress }
           ];
           this.dutyPerson = json.dutyPerson;
           this.windowPerson = json.windowPerson;
           this.problemNo = json.problemNo;
           console.log("data:", this.data);
+          this.$vux.loading.hide();
         })
-        .catch(err=>console.log(err))
+        .catch(err => console.log(err));
     }
   }
 };

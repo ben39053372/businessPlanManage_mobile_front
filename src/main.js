@@ -2,8 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './vuex/store'
-import { LoadingPlugin } from 'vux'
+import { LoadingPlugin ,AlertPlugin} from 'vux'
 Vue.use(LoadingPlugin)
+Vue.use(AlertPlugin)
 Vue.config.productionTip = false
 new Vue({
   router,

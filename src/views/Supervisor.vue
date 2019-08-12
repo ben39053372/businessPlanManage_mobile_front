@@ -1,7 +1,7 @@
 <template>
   <div class="Supervisor">
     <tab v-model="supervisorState">
-      <tab-item v-for="(item,key) in list1" :key="key">{{item}}</tab-item>
+      <tab-item v-for="(item,key) in list1" :key="key">{{item}}({{count[key]}})</tab-item>
     </tab>
     <div class="paper">
       <card>
@@ -10,7 +10,7 @@
           v-for="list in getSupervisorList"
           :key="list.id"
           :border-intent="false"
-          :link="list.link" 
+          :link="list.link"
         >
           <img
             slot="icon"
@@ -36,8 +36,9 @@
 </template>
 
 <script>
+import axios from "axios";
 import { Card, Tab, TabItem, Group, Cell, CellBox } from "vux";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Card,
@@ -47,21 +48,60 @@ export default {
     Cell,
     CellBox
   },
-  mounted(){
+  mounted() {
     this.updateSupervisorList();
   },
   data() {
     return {
-      list1: ["正常推进","延期", "取消", "关闭","预关闭"],
+      list1: ["正常推进", "延期", "取消", "关闭", "预关闭"],
       demo1: "待办",
-      index: 0
+      index: 0,
+      count:[0,0,0,0,0],
     };
   },
-  methods:{
-    ...mapActions(['updateSupervisorList'])
+  methods: {
+    //...mapActions(['updateSupervisorList']),
+    ...mapMutations(["setSupervisorList"]),
+    //督办事项分页查询
+    updateSupervisorList() {
+      this.$vux.loading.show({
+        text: "Loading"
+      });
+      axios
+        .get(this.baseurl + "/superviseManageApp/findSuperviseManage", {
+          params: {
+            page: 1,
+            size: 10
+          }
+        })
+        .then(res => {
+          var json = res.data.data;
+          console.log("updateSupervisorList", res.data.data);
+          var dataList = [];
+          for (var i = 0; i < json.length; i++) {
+            var data = json[i].rows;
+            dataList = dataList.concat({
+              title: data.problemDsc,
+              date: data.createTime,
+              status: data.newWorkProgress + "/" + data.workProgress,
+              state: data.problemStatus,
+              id: data.id,
+              link: "/supervisorTips/" + data.id
+            });
+          }
+          console.log(dataList);
+          for(var i=0;i<dataList.length;i++){
+            this.count[dataList[i].state]= this.count[dataList[i].state]+1;
+            console.log(this.count)
+          }
+          this.setSupervisorList(dataList);
+          this.$vux.loading.hide()
+        })
+        .catch(err => console.log(err));
+    }
   },
   computed: {
-    ...mapState(["supervisorList"]),
+    ...mapState(["supervisorList", "baseurl"]),
     supervisorState: {
       get() {
         return this.$store.state.supervisorState;
@@ -79,7 +119,7 @@ export default {
 .group-margin {
   margin-top: 0;
 }
-p{
+p {
   margin: 0;
 }
 </style>

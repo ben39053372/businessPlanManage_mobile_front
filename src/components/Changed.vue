@@ -13,10 +13,12 @@
     <group
       v-if="showContent001"
       gutter="0"
-      style="padding-left:15px;background-color:#04BE02;"
+      style="padding-left:10px;background-color:rgba(4,190,2,0.2);"
     >
-      <cell v-for="changelist in changedList" :key='changelist.key' :title='changelist.title' align-items="flex-start" >
-        <p>
+
+      <cell v-for="changelist in changedList" :key='changelist.key'  align-items="flex-start" style='padding:5px;'>
+        <p slot='title' style='word-break:keep-all;margin:0;text-align:left;font-size:18px'>{{changelist.title}}</p>
+        <p style='font-size:18px;color:#999;text-align:left'>
           <s>{{changelist.before}}</s>
         </p>
         <p class="correct">{{changelist.after}}</p>
@@ -36,7 +38,7 @@ export default {
   },
   data() {
     return {
-      showContent001: false
+      showContent001: true
     };
   },
   computed: {
@@ -46,16 +48,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-s {
-  background: rgba(255, 0, 0, 0.4);
-}
+
 p {
   margin: 10px;
   color: #000;
   font-size: 23px;
 }
 .correct {
-  background: rgba(127, 255, 0, 0.4);
+  font-size: 18px;
+  color:#0000ff;
+  text-align:left;
 }
 .title {
   font-weight: bold;
