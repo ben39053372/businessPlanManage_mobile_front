@@ -79,12 +79,15 @@ export default {
       this.$vux.loading.show({
         text: "Loading"
       });
+      console.log(typeof(this.$route.params.planDep))
+      console.log(typeof(this.$route.params.month))
       axios
-        .post(this.baseurl + "/app/progressReportApp/getFlowDetailAndFileUrl", {
+        .post("http://172.30.215.96:8080/api/app/progressReportApp/getFlowDetailAndFileUrl", {
           planDeptValue: this.$route.params.planDep,
-          month: this.$route.params.month
+          month: parseInt(this.$route.params.month) 
         })
         .then(res => {
+          console.log(res.data.data[0])
           var json = res.data.data[0];
           //console.log(json);
           //圖片連結
@@ -100,20 +103,20 @@ export default {
                 //下一點是紅色
                 if (flowData[i + 1].flowColor == "red") {
                   data = data.concat({
-                    name: flowData[i].operation,
+                    name: flowData[i].operator,
                     isDone: true,
                     lineDone: false,
-                    inline_desc: flowData[i].operatorMsg,
+                    inline_desc: flowData[i].operation,
                     date: flowData[i].time
                   });
                 }
                 //下一點不是紅色
                 else {
                   data = data.concat({
-                    name: flowData[i].operation,
+                    name: flowData[i].operator,
                     isDone: true,
                     lineDone: true,
-                    inline_desc: flowData[i].operatorMsg,
+                    inline_desc: flowData[i].operation,
                     date: flowData[i].time
                   });
                 }
@@ -121,10 +124,10 @@ export default {
               //是紅
               else {
                 data = data.concat({
-                  name: flowData[i].operation,
+                  name: flowData[i].operator,
                   isDone: false,
                   lineDone: false,
-                  inline_desc: flowData[i].operatorMsg,
+                  inline_desc: flowData[i].operation,
                   date: flowData[i].time
                 });
               }
@@ -133,18 +136,18 @@ export default {
             if (i == flowData.length - 1) {
               if (flowData[i].flowColor == "green") {
                 data = data.concat({
-                  name: flowData[i].operation,
+                  name: flowData[i].operator,
                   isDone: true,
                   lineDone: true,
-                  inline_desc: flowData[i].operatorMsg,
+                  inline_desc: flowData[i].operation,
                   date: flowData[i].time
                 });
               } else {
                 data = data.concat({
-                  name: flowData[i].operation,
+                  name: flowData[i].operator,
                   isDone: false,
                   lineDone: false,
-                  inline_desc: flowData[i].operatorMsg,
+                  inline_desc: flowData[i].operation,
                   date: flowData[i].time
                 });
               }
@@ -156,11 +159,11 @@ export default {
     },
     pass() {
       axios
-        .post(this.baseurl + "/app/progressReportApp/progressPorterApproval", {
+        .post("http://172.30.215.96:8080/api/app/progressReportApp/progressPorterApproval", {
           status: 1,
           type: 1,
           planDeptValue: this.$route.params.planDep,
-          msg: this.msg
+          //msg: this.msg
         })
         .then(res => {
           //console.log(this.$route.params.planDep, this.msg);
@@ -173,11 +176,11 @@ export default {
     },
     dontpass() {
       axios
-        .post(this.baseurl + "/app/progressReportApp/progressPorterApproval", {
+        .post('http://172.30.215.96:8080/api/app/progressReportApp/progressPorterApproval', {
           status: 0,
           type: 1,
           planDeptValue: this.$route.params.planDep,
-          msg: this.msg
+          //msg: this.msg
         })
         .then(res => {
           //console.log(this.$route.params.planDep, this.msg);

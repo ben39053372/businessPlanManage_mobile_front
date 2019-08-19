@@ -72,7 +72,7 @@ export default {
         text: "Loading"
       });
       axios
-        .get(this.baseurl + "/superviseManageApp/findSuperviseManage", {
+        .get("http://172.30.215.96:8080/api/app/superviseManageApp/findSuperviseManage", {
           params: {
             page: 1,
             size: 10
@@ -81,7 +81,9 @@ export default {
         .then(res => {
           var json = res.data.data;
           var dataList = [];
-          for (var i = 0; i < json.length; i++) {
+          console.log(res)
+          if(json != null){
+            for (var i = 0; i < json.length; i++) {
             var data = json[i].rows;
             dataList = dataList.concat({
               title: data.problemDsc,
@@ -96,6 +98,8 @@ export default {
             this.count[dataList[i].state] = this.count[dataList[i].state] + 1;
           }
           this.setSupervisorList(dataList);
+          }
+          
           this.$vux.loading.hide();
         })
         .catch(err => console.log(err));

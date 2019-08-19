@@ -7,29 +7,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
   state: {
-    moredetail:[
-      {title:'申请单号5',content:'JY-2019-001号'},
-      {title:'申请单号4',content:'JY-2019-0021号'},
-      {title:'申请单号3',content:'JY-2019-0031号'},
-      {title:'申请单号2',content:'JY-2019-0041号'},
-      {title:'申请单号1',content:'JY-2019-0051号'},
-    ],
+    moredetail:[],
     baseurl: 'http://rap2api.taobao.org/app/mock/227201/api',
     baseurl1: 'http://172.30.215.254:8080/',
     baseurl2: 'http://172.30.210.229:8080/',
     baseurl3: 'http://172.30.215.96:8080/',
-    supervisorList: [
-      { "title": "自动驾驶示范运行计划", "date": "2018/04/10", "status": "院长临时交办", "state": 0 },
-      { "title": "自动驾驶示范运行计划", "date": "2018/04/10", "status": "院长临时交办", "state": 1 },
-      { "title": "自动驾驶示范运行计划", "date": "2018/04/10", "status": "院长临时交办", "state": 2 },
-    ],
+    supervisorList: [],
     approvalUpdate: [],
     approvalChange: [],
     //变更事项
-    changedList: [
-      { "title": "更改事项", "after": "xxxx", "before": "yyyy" },
-      { "title": "更改事项2", "after": "xxxxxx", "before": "yyyyyy" }
-    ],
+    changedList: [],
     //Chart Data
     MonthChartData: [],
     //Chart Data
@@ -37,13 +24,7 @@ export default new Vuex.Store({
     //Chart Data
     departmentChartData: [],
 
-    flowChart: [
-      { "name": "流程一", "isDone": true, "lineDone": true, "inline_desc": "123", "date": "1999/09/09" },
-      { "name": "流程二", "isDone": true, "lineDone": false, "inline_desc": "123", "date": "1999/09/09" },
-      { "name": "流程三", "isDone": false, "lineDone": false, "inline_desc": "123", "date": "1999/09/09" },
-      { "name": "流程四", "isDone": false, "lineDone": false, "inline_desc": "123", "date": "1999/09/09" },
-      { "name": "完成", "isDone": false, "lineDone": false, "date": "1999/09/09" },
-    ],
+    flowChart: [],
 
     //UI用
     chartState: 0,

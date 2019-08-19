@@ -35,10 +35,10 @@
         </div>
       </card>
       <grid class="grid" :show-lr-borders="false" :show-vertical-dividers="true">
-        <grid-item label="经营月报" class="grid">
+        <grid-item label="经营月报" class="grid" link='/businessReport'>
           <img slot="icon" src="../assets/icon/barchart.png" />
         </grid-item>
-        <grid-item label="督办月报" class="grid">
+        <grid-item label="督办月报" class="grid" link='/supervisorReport'>
           <img slot="icon" src="../assets/icon/unorderedlist.png" />
         </grid-item>
       </grid>
@@ -85,20 +85,21 @@ export default {
         text: 'Loading'
       })
       console.log(this.thismonth+1)
-      axios.post(this.baseurl + '/app/portal/getALLCompletionData',{
+      axios.post('http://172.30.210.229:8080/api/app/portal/getALLCompletionData',{
         "startMonth":"1",
-        "endMonth": this.thismonth+1,
+        "endMonth": thismonth+1,
         "type": "1",
         "depName" : "全部"
       })
         .then(res=>{
+          console.log('111')
           var json = res.data.data
-          console.log(json)
+          console.log('homejson:',json)
 
           //节点完成率
-          this.productNum=json.nodeCompletion[0].completeProportion
-          this.skillCreat=json.nodeCompletion[1].completeProportion
-          this.manage=json.nodeCompletion[2].completeProportion
+          this.productNum=json[1].nodeCompletion[0].completeProportion
+          this.skillCreat=json[1].nodeCompletion[1].completeProportion
+          this.manage=json[1].nodeCompletion[2].completeProportion
           this.$vux.loading.hide()
         })
         .catch(err=>console.log(err))

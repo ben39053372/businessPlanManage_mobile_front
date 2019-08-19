@@ -44,9 +44,9 @@ export default {
       var thismonth = new Date().getMonth();
       console.log(thismonth + 1);
       axios
-        .post(this.baseurl + "/app/portal/getALLCompletionData", {
+        .post("http://172.30.210.229:8080/api/app/portal/getALLCompletionData", {
           startMonth: "1",
-          endMonth: this.thismonth + 1,
+          endMonth: thismonth + 1,
           type: "1",
           depName: "全部"
         })
@@ -56,8 +56,8 @@ export default {
           var data = [];
           for (var i = 0; i < 5; i++) {
             data = data.concat({
-              name: json.departmenList[i].depName,
-              value: parseInt(json.departmenList[i].depCompletion)
+              name: json[3].departmenList[i].depName,
+              value: parseInt(json[3].departmenList[i].depCompletion)
             });
           }
           this.data = data;

@@ -99,7 +99,7 @@ export default {
     this.fetchData();
   },
   methods: {
-    ...mapMutations(["setMoreDetail", "setChange"]),
+    ...mapMutations(["setMoreDetail", "setChange","setFlowChart"]),
     showDetail() {
       if (this.moreDetail == true) {
         this.moreDetail = false;
@@ -114,29 +114,26 @@ export default {
       });
       console.log(this.$route.params.id);
       axios
-        .get(
-          "http://rap2api.taobao.org/app/mock/227201/businessplanmanage/api/app/changePlan",
-          {
-            params: {
-              id: this.$route.params.id
-            }
-          }
-        )
+        .get("http://172.30.215.95:8080/api/app/changePlan/"+this.$route.params.id)
         .then(res => {
+          console.log(res)
           this.$vux.loading.show({
             text: "Loading"
           });
           const json = res.data.data;
-          //console.log(json)
-          const resultList = json.planChangeDetail;
-          var dept = "";
+          console.log('json:',json)
+          const resultList = json.data.planChangeDetail;
+          console.log('resultList:',resultList);
+          /**
           for (var i = 0; i < resultList.relevanceDept.length; i++) {
             dept = dept.concat(resultList.relevanceDept[i].dept) + "/";
-          }
+          }*/
+          var dept = JSON.parse(resultList.relevanceDept)
+          console.log('dept:',dept)
           var data = [
             { title: "申请单号", content: resultList.applicationCode },
             { title: "申请单位", content: resultList.applyDept },
-            { title: "关联单位", content: dept },
+            { title: "关联单位", content: dept[0].dept },
             {
               title: "影响年度经营目标",
               content: resultList.influenceTargetVlaue
@@ -177,12 +174,75 @@ export default {
           }
           this.setMoreDetail(data);
           this.setChange(change);
+          var flowData = json.data.resultList;
+          console.log('flowData:',flowData)
+          var flow=[]
+          for (var i = 0; i < flowData.length; i++) {
+            //不是最後一點
+            if (i != flowData.length - 1) {
+              //是綠
+              if (flowData[i].color == "green") {
+                //下一點是紅色
+                if (flowData[i + 1].color == "red") {
+                  flow = flow.concat({
+                    name: flowData[i].auditStep,
+                    isDone: true,
+                    lineDone: false,
+                    inline_desc: flowData[i].operatorMsg,
+                    date: flowData[i].time
+                  });
+                }
+                //下一點不是紅色
+                else {
+                  flow = flow.concat({
+                    name: flowData[i].auditStep,
+                    isDone: true,
+                    lineDone: true,
+                    inline_desc: flowData[i].operatorMsg,
+                    date: flowData[i].time
+                  });
+                }
+              }
+              //是紅
+              else {
+                flow = flow.concat({
+                  name: flowData[i].auditStep,
+                  isDone: false,
+                  lineDone: false,
+                  inline_desc: flowData[i].operatorMsg,
+                  date: flowData[i].time
+                });
+              }
+            }
+            //最後一點
+            if (i == flowData.length - 1) {
+              if (flowData[i].color == "green") {
+                flow = flow.concat({
+                  name: flowData[i].auditStep,
+                  isDone: true,
+                  lineDone: true,
+                  inline_desc: flowData[i].operatorMsg,
+                  date: flowData[i].time
+                });
+              } else {
+                flow = flow.concat({
+                  name: flowData[i].auditStep,
+                  isDone: false,
+                  lineDone: false,
+                  inline_desc: flowData[i].operatorMsg,
+                  date: flowData[i].time
+                });
+              }
+            }
+          }
+          this.setFlowChart(flow);
           this.$vux.loading.hide();
+          
         });
     },
     pass() {
       axios
-        .post(this.baseurl + "/app/changePlan/auditPlanYes", {
+        .post("http://172.30.215.95:8080/api/app/changePlan/auditPlanYes", {
           auditMsg: this.msg,
           planChangeId: this.$route.params.id
         })
@@ -195,7 +255,7 @@ export default {
     },
     dontpass() {
       axios
-        .post(this.baseurl + "/app/changePlan/auditPlanNo", {
+        .post("http://172.30.215.95:8080/api/app/changePlan/auditPlanNo", {
           auditMsg: this.msg,
           planChangeId: this.$route.params.id
         })

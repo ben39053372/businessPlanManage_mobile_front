@@ -62,7 +62,7 @@ export default {
         text: "Loading"
       });
       axios
-        .get(this.baseurl + "/app/changePlan/auditAndPlan")
+        .get("http://172.30.215.95:8080/api/app/changePlan/auditAndPlan")
         .then(res => {
           console.log(res);
           var json = res.data.data;
@@ -71,93 +71,96 @@ export default {
           //待辦
           for (var i = 0; i < json.audit.auditComList.length; i++) {
             data = data.concat({
-              title: json.audit.auditComList[i].title,
+              title: json.audit.auditComList[i].tital,
               link:
                 "/approvalUpdate/" +
                 json.audit.auditComList[i].planDep +
                 "/" +
                 json.audit.auditComList[i].month +
                 "/" +
-                json.audit.auditComList[i].title,
+                json.audit.auditComList[i].tital,
               state: 0
             });
           }
           //跟蹤
           for (var i = 0; i < json.audit.auditFollowList.length; i++) {
             data = data.concat({
-              title: json.audit.auditFollowList[i].title,
+              title: json.audit.auditFollowList[i].tital,
               link:
                 "/approvalUpdate/" +
                 json.audit.auditFollowList[i].planDep +
                 "/" +
                 json.audit.auditFollowList[i].month +
                 "/" +
-                json.audit.auditFollowList[i].title,
+                json.audit.auditFollowList[i].tital,
               state: 1
             });
           }
           //已辦
           for (var i = 0; i < json.audit.auditFinList.length; i++) {
             data = data.concat({
-              title: json.audit.auditFinList[i].title,
+              title: json.audit.auditFinList[i].tital,
               link:
                 "/approvalUpdate/" +
                 json.audit.auditFinList[i].planDep +
                 "/" +
                 json.audit.auditFinList[i].month +
                 "/" +
-                json.audit.auditFinList[i].title,
+                json.audit.auditFinList[i].tital,
               state: 2
             });
           }
           console.log("ApprovalUpdate", data);
           this.setApprovalUpdateList(data);
-        })
-        .catch(err => console.log(err));
-      axios
-        .get(this.baseurl + "/app/changePlan/auditAndPlan")
-        .then(res => {
-          console.log(res);
-          var json = res.data.data;
-          console.log(json);
-          var data = [];
+          var data2 = [];
           //待辦
-          for (var i = 0; i < json.plan.planComList.length; i++) {
-            data = data.concat({
-              title: json.plan.planComList[i].changeItem,
-              link:
-                "/approvalChange/1" +
-                //+ json.plan.planFinishList[i].id,
-                "/" +
-                json.plan.planComList[i].changeItem,
-              state: 0
-            });
+          if (json.plan.planComList != null) {
+            for (var i = 0; i < json.plan.planComList.length; i++) {
+              data2 = data2.concat({
+                title: json.plan.planComList[i].changeItem,
+                link:
+                  "/approvalChange/" +
+                  + json.plan.planComList[i].id+
+                  "/" +
+                  json.plan.planComList[i].changeItem,
+                state: 0
+              });
+            }
           }
+
           //跟蹤
-          for (var i = 0; i < json.plan.planFollowList.length; i++) {
-            data = data.concat({
-              title: json.plan.planFollowList[i].changeItem,
-              link:
-                "/approvalChange/1" +
-                //+ json.plan.planFinishList[i].id,
-                json.plan.planFollowList[i].changeItem,
-              state: 1
-            });
+          if (json.plan.planFollowList != null) {
+            for (var i = 0; i < json.plan.planFollowList.length; i++) {
+              data2 = data2.concat({
+                title: json.plan.planFollowList[i].changeItem,
+                link:
+                  "/approvalChange/" +
+                  + json.plan.planFollowList[i].id +
+                  '/'+
+                  json.plan.planFollowList[i].changeItem,
+                state: 1
+              });
+            }
           }
+
           //已辦
-          for (var i = 0; i < json.plan.planFinishList.length; i++) {
-            data = data.concat({
-              title: json.plan.planFinishList[i].changeItem,
-              link:
-                "/approvalChange/1" +
-                //+ json.plan.planFinishList[i].id
-                json.plan.planFinishList[i].changeItem,
-              state: 2
-            });
+          if (json.plan.planFinishList != null) {
+            for (var i = 0; i < json.plan.planFinishList.length; i++) {
+              data2 = data2.concat({
+                title: json.plan.planFinishList[i].changeItem,
+                link:
+                  "/approvalChange" +
+                  + json.plan.planFinishList[i].id +
+                  '/'+
+                  json.plan.planFinishList[i].changeItem,
+                state: 2
+              });
+            }
           }
-          console.log("ApprovalChange", data);
-          this.setApprovalChangeList(data);
-          this.$vux.loading.hide()
+
+          console.log("ApprovalChange", data2);
+          this.setApprovalChangeList(data2);
+          this.$vux.loading.hide();
         })
         .catch(err => console.log(err));
     }

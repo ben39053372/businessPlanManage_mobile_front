@@ -43,45 +43,45 @@ export default {
         text: "Loading"
       });
       var thismonth = new Date().getMonth();
-      console.log(thismonth + 1);
       axios
-        .post(this.baseurl + "/app/portal/getALLCompletionData", {
+        .post("http://172.30.210.229:8080/api/app/portal/getALLCompletionData", {
           startMonth: "1",
-          endMonth: this.thismonth + 1,
+          endMonth: thismonth+1,
           type: "1",
           depName: "全部"
         })
         .then(res => {
+          console.log(res)
           var json = res.data.data;
           console.log(json);
 
-          //節點完成率
-          this.productNum = json.nodeCompletion[0].completeProportion;
-          this.skillCreat = json.nodeCompletion[1].completeProportion;
-          this.manage = json.nodeCompletion[2].completeProportion;
-          //當月統計
+          //节点完成率
+          this.productNum = json[1].nodeCompletion[0].completeProportion;
+          this.skillCreat = json[1].nodeCompletion[1].completeProportion;
+          this.manage = json[1].nodeCompletion[2].completeProportion;
+          //当月统计
           var data = [];
           for (var i = 1; i <= 12; i++) {
             data = data.concat({
-              name: "計畫完成數",
+              name: "计划完成数",
               time: i + "月",
-              num1: json.planCompletion[1][i + "月份"],
-              num3: json.planCompletion[2][i + "月份"]
+              num1: json[2].planCompletion[1][i + "月份"],
+              num3: json[2].planCompletion[2][i + "月份"]
             });
           }
           for (var i = 1; i <= 12; i++) {
             data = data.concat({
-              name: "計畫完成緦數",
+              name: "计划完成缌数",
               time: i + "月",
-              num1: json.planCompletion[0][i + "月份"],
-              num3: json.planCompletion[2][i + "月份"]
+              num1: json[2].planCompletion[0][i + "月份"],
+              num3: json[2].planCompletion[2][i + "月份"]
             });
           }
           for (var i = 1; i <= 12; i++) {
             data = data.concat({
-              name: "計畫完成率",
+              name: "计划完成率",
               time: i + "月",
-              num3: json.planCompletion[2][i + "月份"]
+              num3: json[2].planCompletion[2][i + "月份"]
             });
           }
           console.log(data);
@@ -97,7 +97,7 @@ export default {
               max: 2010
             }
           });
-          //畫棒
+          //画棒
           chart
             .interval()
             .position("time*num1")
@@ -106,7 +106,7 @@ export default {
               type: "dodge",
               marginRatio: 0.05
             });
-          //畫線
+          //画线
           chart
             .line()
             .position("time*num3")

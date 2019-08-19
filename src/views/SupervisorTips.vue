@@ -74,8 +74,7 @@ export default {
       });
       axios
         .post(
-          this.baseurl +
-            "/superviseManageApp/saveIndicateMsg?id=" +
+          "http://172.30.215.96:8080/api/app/superviseManageApp" +
             this.$route.params.id,
           {
             dutyPerson: this.dutyPerson,
