@@ -1,8 +1,10 @@
 <template>
   <div class="Supervisor">
-    <tab v-model="supervisorState">
-      <tab-item v-for="(item,key) in list1" :key="key">{{item}}({{count[key]}})</tab-item>
-    </tab>
+    <sticky>
+      <tab v-model="supervisorState">
+        <tab-item v-for="(item,key) in list1" :key="key">{{item}}({{count[key]}})</tab-item>
+      </tab>
+    </sticky>
     <div class="paper">
       <card>
         <cell
@@ -11,6 +13,7 @@
           :key="list.id"
           :border-intent="false"
           :link="list.link"
+          style="padding:7px;"
         >
           <img
             slot="icon"
@@ -37,7 +40,7 @@
 
 <script>
 import axios from "axios";
-import { Card, Tab, TabItem, Group, Cell, CellBox } from "vux";
+import { Card, Tab, TabItem, Group, Cell, CellBox, Sticky } from "vux";
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
@@ -46,7 +49,8 @@ export default {
     TabItem,
     Group,
     Cell,
-    CellBox
+    CellBox,
+    Sticky
   },
   mounted() {
     this.updateSupervisorList();
@@ -56,7 +60,7 @@ export default {
       list1: ["正常推进", "延期", "取消", "关闭", "预关闭"],
       demo1: "待办",
       index: 0,
-      count:[0,0,0,0,0],
+      count: [0, 0, 0, 0, 0]
     };
   },
   methods: {
@@ -76,7 +80,6 @@ export default {
         })
         .then(res => {
           var json = res.data.data;
-          console.log("updateSupervisorList", res.data.data);
           var dataList = [];
           for (var i = 0; i < json.length; i++) {
             var data = json[i].rows;
@@ -89,13 +92,11 @@ export default {
               link: "/supervisorTips/" + data.id
             });
           }
-          console.log(dataList);
-          for(var i=0;i<dataList.length;i++){
-            this.count[dataList[i].state]= this.count[dataList[i].state]+1;
-            console.log(this.count)
+          for (var i = 0; i < dataList.length; i++) {
+            this.count[dataList[i].state] = this.count[dataList[i].state] + 1;
           }
           this.setSupervisorList(dataList);
-          this.$vux.loading.hide()
+          this.$vux.loading.hide();
         })
         .catch(err => console.log(err));
     }

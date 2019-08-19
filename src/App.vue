@@ -6,15 +6,15 @@
     <tabbar v-model='index'>
       <tabbar-item link="/approval">
         <img slot="icon" src='../src/assets/icon/piechart.png' />
-        <span slot="label">审批待办</span>
+        <span slot="label" class='tabbar'>审批待办</span>
       </tabbar-item>
       <tabbar-item selected link="/">
         <img slot="icon" src="../src/assets/icon/user.png" />
-        <span slot="label">经营概况</span>
+        <span slot="label" class='tabbar'>经营概况</span>
       </tabbar-item>
       <tabbar-item link="/supervisor">
         <img slot="icon" src="../src/assets/icon/file-exception.png" />
-        <span slot="label">督办事项</span>
+        <span slot="label" class='tabbar'>督办事项</span>
       </tabbar-item>
     </tabbar>
   </div>
@@ -37,6 +37,11 @@ export default {
 </script>
 
 <style>
+.tabbar{
+  margin:20px;
+  padding:10px;
+  font-size:14px;
+}
 h4 {
   margin: 10px;
   color: #04BE02;
@@ -59,5 +64,11 @@ body {
   overflow-x: hidden;
   margin: 0;
   background: #efefef;
+}
+p{
+  margin: 0px;
+}
+a{
+  text-decoration: none;
 }
 </style>

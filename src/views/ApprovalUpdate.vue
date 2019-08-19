@@ -73,10 +73,12 @@ export default {
   },
   mounted() {
     this.fetchDataByPlanDeptAndMonth();
-    
   },
   methods: {
     fetchDataByPlanDeptAndMonth() {
+      this.$vux.loading.show({
+        text: "Loading"
+      });
       axios
         .post(this.baseurl + "/app/progressReportApp/getFlowDetailAndFileUrl", {
           planDeptValue: this.$route.params.planDep,
@@ -149,6 +151,7 @@ export default {
             }
           }
           this.setFlowChart(data);
+          this.$vux.loading.hide();
         });
     },
     pass() {

@@ -2,11 +2,13 @@
   <div>
     <x-header :left-options="{backText: ''}">项目管理系统计画变更</x-header>
 
+    <!--
     <div class="paper">
       <card>
         <h2 slot="content">{{$route.params.title}}</h2>
       </card>
     </div>
+    -->
 
     <!-- 变更内容 -->
     <Changed />
@@ -121,6 +123,9 @@ export default {
           }
         )
         .then(res => {
+          this.$vux.loading.show({
+            text: "Loading"
+          });
           const json = res.data.data;
           //console.log(json)
           const resultList = json.planChangeDetail;

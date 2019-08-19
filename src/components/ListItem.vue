@@ -2,24 +2,26 @@
   <group gutter="0" style="height:100%">
     <div class="paper">
       <card>
-        <h4 slot="header">进展更新</h4>
+        <h4 slot="header" class="subTitle">进展更新</h4>
         <cell
           slot="content"
+          style="padding:14px 5px"
           :key="update.id"
           v-for="update in getApprovalUpdateList"
           class="cell"
           :title="update.title"
           :link="update.link"
           is-link
-          :border-intent="true"
+          :border-intent="false"
         />
       </card>
     </div>
 
     <div class="paper">
-      <card>
-        <h4 slot="header">计划变更</h4>
+      <card style="padding:0px">
+        <h4 slot="header" class="subTitle">计划变更</h4>
         <cell
+          style="padding:14px 5px"
           slot="content"
           :key="change.id"
           v-for="change in getApprovalChangeList"
@@ -36,7 +38,8 @@
 
 <script>
 import { Card, Cell, CellBox, Group, Grid, GridItem, Divider } from "vux";
-import { mapState, mapGetters, mapActions } from "vuex";
+import axios from "axios";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   name: "ListItem",
   components: {
@@ -48,31 +51,131 @@ export default {
     GridItem,
     Divider
   },
-  mounted(){
-    this.mount();
-    this.updateApprovalUpdateList()
-    this.updateApprovalChangeList()
+  mounted() {
+    this.updateApprovalList();
   },
-  methods:{
-    mount(){
-      console.log('mounted approval')
-    },
-    ...mapActions(['updateApprovalUpdateList','updateApprovalChangeList']),
+  methods: {
+    ...mapMutations(["setApprovalUpdateList", "setApprovalChangeList"]),
+    //進展更新列表
+    updateApprovalList() {
+      this.$vux.loading.show({
+        text: "Loading"
+      });
+      axios
+        .get(this.baseurl + "/app/changePlan/auditAndPlan")
+        .then(res => {
+          console.log(res);
+          var json = res.data.data;
+          console.log(json);
+          var data = [];
+          //待辦
+          for (var i = 0; i < json.audit.auditComList.length; i++) {
+            data = data.concat({
+              title: json.audit.auditComList[i].title,
+              link:
+                "/approvalUpdate/" +
+                json.audit.auditComList[i].planDep +
+                "/" +
+                json.audit.auditComList[i].month +
+                "/" +
+                json.audit.auditComList[i].title,
+              state: 0
+            });
+          }
+          //跟蹤
+          for (var i = 0; i < json.audit.auditFollowList.length; i++) {
+            data = data.concat({
+              title: json.audit.auditFollowList[i].title,
+              link:
+                "/approvalUpdate/" +
+                json.audit.auditFollowList[i].planDep +
+                "/" +
+                json.audit.auditFollowList[i].month +
+                "/" +
+                json.audit.auditFollowList[i].title,
+              state: 1
+            });
+          }
+          //已辦
+          for (var i = 0; i < json.audit.auditFinList.length; i++) {
+            data = data.concat({
+              title: json.audit.auditFinList[i].title,
+              link:
+                "/approvalUpdate/" +
+                json.audit.auditFinList[i].planDep +
+                "/" +
+                json.audit.auditFinList[i].month +
+                "/" +
+                json.audit.auditFinList[i].title,
+              state: 2
+            });
+          }
+          console.log("ApprovalUpdate", data);
+          this.setApprovalUpdateList(data);
+        })
+        .catch(err => console.log(err));
+      axios
+        .get(this.baseurl + "/app/changePlan/auditAndPlan")
+        .then(res => {
+          console.log(res);
+          var json = res.data.data;
+          console.log(json);
+          var data = [];
+          //待辦
+          for (var i = 0; i < json.plan.planComList.length; i++) {
+            data = data.concat({
+              title: json.plan.planComList[i].changeItem,
+              link:
+                "/approvalChange/1" +
+                //+ json.plan.planFinishList[i].id,
+                "/" +
+                json.plan.planComList[i].changeItem,
+              state: 0
+            });
+          }
+          //跟蹤
+          for (var i = 0; i < json.plan.planFollowList.length; i++) {
+            data = data.concat({
+              title: json.plan.planFollowList[i].changeItem,
+              link:
+                "/approvalChange/1" +
+                //+ json.plan.planFinishList[i].id,
+                json.plan.planFollowList[i].changeItem,
+              state: 1
+            });
+          }
+          //已辦
+          for (var i = 0; i < json.plan.planFinishList.length; i++) {
+            data = data.concat({
+              title: json.plan.planFinishList[i].changeItem,
+              link:
+                "/approvalChange/1" +
+                //+ json.plan.planFinishList[i].id
+                json.plan.planFinishList[i].changeItem,
+              state: 2
+            });
+          }
+          console.log("ApprovalChange", data);
+          this.setApprovalChangeList(data);
+          this.$vux.loading.hide()
+        })
+        .catch(err => console.log(err));
+    }
   },
   data() {
     return {};
   },
   computed: {
-    ...mapState(["approvalUpdate", "approvalChange"]),
+    ...mapState(["approvalUpdate", "approvalChange", "baseurl"]),
     ...mapGetters(["getApprovalUpdateList", "getApprovalChangeList"])
   }
 };
 </script>
 
 <style scoped>
-
 .cell {
   background: #fff;
+  padding: 0px 10px;
 }
 
 .grid-center {
@@ -86,6 +189,9 @@ export default {
 }
 .sub-item {
   color: #888;
+}
+.subTitle {
+  margin: 5px 5px;
 }
 .slide {
   padding: 0 20px;
