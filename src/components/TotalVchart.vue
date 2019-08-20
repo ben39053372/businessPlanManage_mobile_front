@@ -1,5 +1,5 @@
 <template>
-  <v-chart :id='2' prevent-render syncY="true" @on-render="fetchData"></v-chart>
+  <v-chart  prevent-render syncY="true" @on-render="fetchData"></v-chart>
 </template>
 
 <script>
