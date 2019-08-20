@@ -90,7 +90,10 @@ export default {
           console.log("render");
           this.$vux.loading.hide()
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          this.$vux.loading.hide()
+          this.$vux.toast.show()
+        });
     }
   },
   computed: {

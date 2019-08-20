@@ -102,7 +102,10 @@ export default {
           this.manage=json[1].nodeCompletion[2].completeProportion
           this.$vux.loading.hide()
         })
-        .catch(err=>console.log(err))
+        .catch(err=>{
+          this.$vux.loading.hide()
+          this.$vux.toast.show()
+        })
     }
   },
   data() {

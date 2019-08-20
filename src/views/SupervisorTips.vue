@@ -84,14 +84,14 @@ export default {
           }
         )
         .then(res => {
-          console.log(res)
-          this.$vux.loading.hide()
+          console.log(res);
+          this.$vux.loading.hide();
+          this.$vux.alert.show({
+            title: this.msg,
+            content: "成功發送!"
+          });
         })
-        .catch(err => console.log(err));
-      this.$vux.alert.show({
-        title: this.msg,
-        content: "成功發送!"
-      });
+        .catch(err => this.$vux.loading.hide());
     },
     getDataById() {
       this.$vux.loading.show({
@@ -139,7 +139,10 @@ export default {
           console.log("data:", this.data);
           this.$vux.loading.hide();
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          this.$vux.loading.hide()
+          this.$vux.toast.show()
+        });
     }
   }
 };

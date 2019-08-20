@@ -120,7 +120,7 @@ export default {
                 title: json.plan.planComList[i].changeItem,
                 link:
                   "/approvalChange/" +
-                  + json.plan.planComList[i].id+
+                  +json.plan.planComList[i].id +
                   "/" +
                   json.plan.planComList[i].changeItem,
                 state: 0
@@ -135,8 +135,8 @@ export default {
                 title: json.plan.planFollowList[i].changeItem,
                 link:
                   "/approvalChange/" +
-                  + json.plan.planFollowList[i].id +
-                  '/'+
+                  +json.plan.planFollowList[i].id +
+                  "/" +
                   json.plan.planFollowList[i].changeItem,
                 state: 1
               });
@@ -150,8 +150,8 @@ export default {
                 title: json.plan.planFinishList[i].changeItem,
                 link:
                   "/approvalChange" +
-                  + json.plan.planFinishList[i].id +
-                  '/'+
+                  +json.plan.planFinishList[i].id +
+                  "/" +
                   json.plan.planFinishList[i].changeItem,
                 state: 2
               });
@@ -162,7 +162,10 @@ export default {
           this.setApprovalChangeList(data2);
           this.$vux.loading.hide();
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          this.$vux.loading.hide();
+          this.$vux.toast.show();
+        });
     }
   },
   data() {

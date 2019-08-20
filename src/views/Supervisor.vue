@@ -72,37 +72,43 @@ export default {
         text: "Loading"
       });
       axios
-        .get("http://172.30.215.96:8080/api/app/superviseManageApp/findSuperviseManage", {
-          params: {
-            page: 1,
-            size: 10
+        .get(
+          "http://172.30.215.96:8080/api/app/superviseManageApp/findSuperviseManage",
+          {
+            params: {
+              page: 1,
+              size: 10
+            }
           }
-        })
+        )
         .then(res => {
           var json = res.data.data;
           var dataList = [];
-          console.log(res)
-          if(json != null){
+          console.log(res);
+          if (json != null) {
             for (var i = 0; i < json.length; i++) {
-            var data = json[i].rows;
-            dataList = dataList.concat({
-              title: data.problemDsc,
-              date: data.createTime,
-              status: data.newWorkProgress + "/" + data.workProgress,
-              state: data.problemStatus,
-              id: data.id,
-              link: "/supervisorTips/" + data.id
-            });
+              var data = json[i].rows;
+              dataList = dataList.concat({
+                title: data.problemDsc,
+                date: data.createTime,
+                status: data.newWorkProgress + "/" + data.workProgress,
+                state: data.problemStatus,
+                id: data.id,
+                link: "/supervisorTips/" + data.id
+              });
+            }
+            for (var i = 0; i < dataList.length; i++) {
+              this.count[dataList[i].state] = this.count[dataList[i].state] + 1;
+            }
+            this.setSupervisorList(dataList);
           }
-          for (var i = 0; i < dataList.length; i++) {
-            this.count[dataList[i].state] = this.count[dataList[i].state] + 1;
-          }
-          this.setSupervisorList(dataList);
-          }
-          
+
           this.$vux.loading.hide();
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          this.$vux.loading.hide();
+          this.$vux.toast.show();
+        });
     }
   },
   computed: {

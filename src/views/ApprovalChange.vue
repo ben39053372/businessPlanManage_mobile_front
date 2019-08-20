@@ -238,7 +238,11 @@ export default {
           this.setFlowChart(flow);
           this.$vux.loading.hide();
           
-        });
+        })
+          .catch(err=>{
+            this.$vux.loading.hide()
+            this.$vux.toast.show()
+          });
     },
     pass() {
       axios

@@ -155,6 +155,10 @@ export default {
           }
           this.setFlowChart(data);
           this.$vux.loading.hide();
+        })
+        .catch(err=>{
+          this.$vux.loading.hide()
+          this.$vux.toast.show()
         });
     },
     pass() {

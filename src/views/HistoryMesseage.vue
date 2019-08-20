@@ -45,6 +45,10 @@ export default {
           }
           //console.log("messageList:", this.messageList);
           this.$vux.loading.hide()
+        })
+        .catch(err=>{
+          this.$vux.loading.hide()
+          this.$vux.toast.show()
         });
     }
   },
