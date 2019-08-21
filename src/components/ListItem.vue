@@ -110,7 +110,7 @@ export default {
               state: 2
             });
           }
-          console.log("ApprovalUpdate", data);
+          //console.log("ApprovalUpdate", data);
           this.setApprovalUpdateList(data);
           var data2 = [];
           //待辦
