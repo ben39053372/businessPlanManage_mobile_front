@@ -44,7 +44,7 @@ export default {
       });
       var thismonth = new Date().getMonth();
       axios
-        .post("http://172.30.210.229:8080/api/app/portal/getALLCompletionData", {
+        .post("http://172.30.215.96:8080/api/app/portal/getALLCompletionData", {
           startMonth: "1",
           endMonth: thismonth+1,
           type: "1",
@@ -66,7 +66,7 @@ export default {
               name: "计划完成数",
               time: i + "月",
               num1: json[2].planCompletion[1][i + "月份"],
-              num3: json[2].planCompletion[2][i + "月份"]
+              "计划完成率": json[2].planCompletion[2][i + "月份"]
             });
           }
           for (var i = 1; i <= 12; i++) {
@@ -74,14 +74,14 @@ export default {
               name: "计划完成缌数",
               time: i + "月",
               num1: json[2].planCompletion[0][i + "月份"],
-              num3: json[2].planCompletion[2][i + "月份"]
+              "计划完成率": json[2].planCompletion[2][i + "月份"]
             });
           }
           for (var i = 1; i <= 12; i++) {
             data = data.concat({
               name: "计划完成率",
               time: i + "月",
-              num3: json[2].planCompletion[2][i + "月份"]
+              "计划完成率": json[2].planCompletion[2][i + "月份"]
             });
           }
           console.log(data);
@@ -109,10 +109,10 @@ export default {
           //画线
           chart
             .line()
-            .position("time*num3")
+            .position("time*计划完成率")
             .color("#facc14");
           //chart.axis("num3", false);
-          chart.legend("num3");
+          chart.legend("计划完成率");
           chart.render();
           console.log("render");
           this.$vux.loading.hide()

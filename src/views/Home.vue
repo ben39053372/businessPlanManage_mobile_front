@@ -85,7 +85,7 @@ export default {
         text: 'Loading'
       })
       console.log(this.thismonth+1)
-      axios.post('http://172.30.210.229:8080/api/app/portal/getALLCompletionData',{
+      axios.post('http://172.30.215.96:8080/api/app/portal/getALLCompletionData',{
         "startMonth":"1",
         "endMonth": thismonth+1,
         "type": "1",

@@ -36,7 +36,7 @@ export default {
       console.log("111");
       axios
         .post(
-          "http://172.30.210.229:8080/api/app/portal/getBusinessMonthReports",
+          "http://172.30.215.96:8080/api/app/portal/getBusinessMonthReports",
           {
             year: thisyear,
             type: 1
@@ -46,6 +46,7 @@ export default {
           var json = res.data.data;
           console.log(json);
           this.data = json;
+          this.$vux.loading.hide();
         })
         .catch(err => {
           this.$vux.loading.hide();

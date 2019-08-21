@@ -74,7 +74,7 @@ export default {
       });
       axios
         .post(
-          "http://172.30.215.96:8080/api/app/superviseManageApp" +
+          "http://172.30.215.96:8080/api/app/superviseManageApp/saveIndicateMsg/" +
             this.$route.params.id,
           {
             dutyPerson: this.dutyPerson,
@@ -98,11 +98,7 @@ export default {
         text: "Loading"
       });
       axios
-        .get(this.baseurl + "/app/superviseManageApp", {
-          params: {
-            id: this.$route.params.id
-          }
-        })
+        .get("http://172.30.215.96:8080/api/app/superviseManageApp/"+this.$route.params.id)
         .then(res => {
           console.log(res.data.data);
           var json = res.data.data;

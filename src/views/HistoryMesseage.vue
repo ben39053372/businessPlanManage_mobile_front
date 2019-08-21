@@ -37,7 +37,7 @@ export default {
         text: "Loading"
       });
       axios
-        .get(this.baseurl + "/app/superviseManageApp/findSuperviseIndicate")
+        .get("http://172.30.215.96:8080/api/app/superviseManageApp/findSuperviseIndicate")
         .then(res => {
           var json = res.data.data;
           for (var i = 0; i < json.length; i++) {

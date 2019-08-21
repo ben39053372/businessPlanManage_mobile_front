@@ -73,21 +73,16 @@ export default {
       });
       axios
         .get(
-          "http://172.30.215.96:8080/api/app/superviseManageApp/findSuperviseManage",
-          {
-            params: {
-              page: 1,
-              size: 10
-            }
-          }
+          "http://172.30.215.96:8080/api/app/superviseManageApp/findSuperviseManage/1/10"
         )
         .then(res => {
-          var json = res.data.data;
+          var json = res.data.data.rows;
           var dataList = [];
           console.log(res);
+          console.log(json)
           if (json != null) {
             for (var i = 0; i < json.length; i++) {
-              var data = json[i].rows;
+              var data = json[i]
               dataList = dataList.concat({
                 title: data.problemDsc,
                 date: data.createTime,
