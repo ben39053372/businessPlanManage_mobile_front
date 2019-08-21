@@ -112,7 +112,7 @@ export default {
       this.$vux.loading.show({
         text: "Loading"
       });
-      console.log(this.$route.params.id);
+      //console.log(this.$route.params.id);
       axios
         .get("http://172.30.215.95:8080/api/app/changePlan/"+this.$route.params.id)
         .then(res => {
@@ -121,9 +121,9 @@ export default {
             text: "Loading"
           });
           const json = res.data.data;
-          console.log('json:',json)
+          //console.log('json:',json)
           const resultList = json.data.planChangeDetail;
-          console.log('resultList:',resultList);
+          //console.log('resultList:',resultList);
           /**
           for (var i = 0; i < resultList.relevanceDept.length; i++) {
             dept = dept.concat(resultList.relevanceDept[i].dept) + "/";
@@ -175,7 +175,7 @@ export default {
           this.setMoreDetail(data);
           this.setChange(change);
           var flowData = json.data.resultList;
-          console.log('flowData:',flowData)
+          //console.log('flowData:',flowData)
           var flow=[]
           for (var i = 0; i < flowData.length; i++) {
             //不是最後一點

@@ -51,9 +51,9 @@ export default {
           depName: "全部"
         })
         .then(res => {
-          console.log(res)
+          //console.log(res)
           var json = res.data.data;
-          console.log(json);
+          //console.log(json);
 
           //节点完成率
           this.productNum = json[1].nodeCompletion[0].completeProportion;
@@ -84,12 +84,12 @@ export default {
               "计划完成率": json[2].planCompletion[2][i + "月份"]
             });
           }
-          console.log(data);
+          //console.log(data);
           this.data = data;
         })
         .then(() => {
           for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
+            //console.log(data[i]);
           }
           chart.source(this.data, {
             release: {
@@ -114,7 +114,7 @@ export default {
           //chart.axis("num3", false);
           chart.legend("计划完成率");
           chart.render();
-          console.log("render");
+          //console.log("render");
           this.$vux.loading.hide()
         })
         .catch(err => {

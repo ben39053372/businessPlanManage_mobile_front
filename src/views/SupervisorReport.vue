@@ -33,7 +33,7 @@ export default {
       this.$vux.loading.show({
         text: "Loading"
       });
-      console.log("111");
+      //console.log("111");
       axios
         .post(
           "http://172.30.215.96:8080/api/app/portal/getBusinessMonthReports",
@@ -44,7 +44,7 @@ export default {
         )
         .then(res => {
           var json = res.data.data;
-          console.log(json);
+          //console.log(json);
           this.data = json;
           this.$vux.loading.hide();
         })

@@ -42,7 +42,7 @@ export default {
         text: "Loading"
       });
       var thismonth = new Date().getMonth();
-      console.log(thismonth + 1);
+      //console.log(thismonth + 1);
       axios
         .post("http://172.30.215.96:8080/api/app/portal/getALLCompletionData", {
           startMonth: "1",
@@ -52,7 +52,7 @@ export default {
         })
         .then(res => {
           var json = res.data.data;
-          console.log(json);
+          //console.log(json);
           var data = [];
           for (var i = 0; i < 5; i++) {
             data = data.concat({
@@ -63,9 +63,6 @@ export default {
           this.data = data;
         })
         .then(() => {
-          for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-          }
           chart.source(this.data);
           chart.legend(false);
           data.map(function(obj) {
@@ -87,7 +84,6 @@ export default {
             .position("name*value")
             .color("name");
           chart.render();
-          console.log("render");
           this.$vux.loading.hide()
         })
         .catch(err => {

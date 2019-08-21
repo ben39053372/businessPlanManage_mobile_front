@@ -64,9 +64,9 @@ export default {
       axios
         .get("http://172.30.215.95:8080/api/app/changePlan/auditAndPlan")
         .then(res => {
-          console.log(res);
+          //console.log(res);
           var json = res.data.data;
-          console.log(json);
+          //console.log(json);
           var data = [];
           //待辦
           for (var i = 0; i < json.audit.auditComList.length; i++) {
@@ -158,7 +158,7 @@ export default {
             }
           }
 
-          console.log("ApprovalChange", data2);
+          //console.log("ApprovalChange", data2);
           this.setApprovalChangeList(data2);
           this.$vux.loading.hide();
         })

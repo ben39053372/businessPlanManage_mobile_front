@@ -29,8 +29,8 @@
             {{list.date}}
             <br />
             <!--status-->
-            {{list.status}}
-            <br />
+            <!-- {{list.status}}
+            <br /> -->
           </cell-box>
         </cell>
       </card>
@@ -78,8 +78,8 @@ export default {
         .then(res => {
           var json = res.data.data.rows;
           var dataList = [];
-          console.log(res);
-          console.log(json)
+          //console.log(res);
+          //console.log(json)
           if (json != null) {
             for (var i = 0; i < json.length; i++) {
               var data = json[i]

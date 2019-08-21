@@ -84,7 +84,7 @@ export default {
       this.$vux.loading.show({
         text: 'Loading'
       })
-      console.log(this.thismonth+1)
+      //console.log(this.thismonth+1)
       axios.post('http://172.30.215.96:8080/api/app/portal/getALLCompletionData',{
         "startMonth":"1",
         "endMonth": thismonth+1,
@@ -92,9 +92,9 @@ export default {
         "depName" : "全部"
       })
         .then(res=>{
-          console.log('111')
+          //console.log('111')
           var json = res.data.data
-          console.log('homejson:',json)
+          //console.log('homejson:',json)
 
           //节点完成率
           this.productNum=json[1].nodeCompletion[0].completeProportion

@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     sendData() {
-      console.log("sendData");
+      //console.log("sendData");
       this.$vux.loading.show({
         text: "Loading"
       });
@@ -84,7 +84,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          //console.log(res);
           this.$vux.loading.hide();
           this.$vux.alert.show({
             title: this.msg,
@@ -100,7 +100,7 @@ export default {
       axios
         .get("http://172.30.215.96:8080/api/app/superviseManageApp/"+this.$route.params.id)
         .then(res => {
-          console.log(res.data.data);
+          //console.log(res.data.data);
           var json = res.data.data;
           var dutyPerson = "";
           for (var i = 0; i < json.dutyPerson.length; i++) {
@@ -117,7 +117,7 @@ export default {
               windowPerson += "/";
             }
           }
-          console.log("dutyPerson", dutyPerson);
+          //console.log("dutyPerson", dutyPerson);
           this.data = [
             { title: "问题来源", content: json.problemSource },
             { title: "交办时间", content: json.assignTime },
@@ -132,7 +132,7 @@ export default {
           this.dutyPerson = json.dutyPerson;
           this.windowPerson = json.windowPerson;
           this.problemNo = json.problemNo;
-          console.log("data:", this.data);
+          //console.log("data:", this.data);
           this.$vux.loading.hide();
         })
         .catch(err => {

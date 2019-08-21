@@ -79,15 +79,15 @@ export default {
       this.$vux.loading.show({
         text: "Loading"
       });
-      console.log(typeof(this.$route.params.planDep))
-      console.log(typeof(this.$route.params.month))
+      //console.log(typeof(this.$route.params.planDep))
+      //console.log(typeof(this.$route.params.month))
       axios
         .post("http://172.30.215.96:8080/api/app/progressReportApp/getFlowDetailAndFileUrl", {
           planDeptValue: this.$route.params.planDep,
           month: parseInt(this.$route.params.month) 
         })
         .then(res => {
-          console.log(res.data.data[0])
+          //console.log(res.data.data[0])
           var json = res.data.data[0];
           //console.log(json);
           //圖片連結
