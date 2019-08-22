@@ -44,7 +44,7 @@ export default {
       });
       var thismonth = new Date().getMonth();
       axios
-        .post("http://172.30.215.96:8080/api/app/portal/getALLCompletionData", {
+        .post("http://172.30.210.229:8080/api/app/portal/getALLCompletionData", {
           startMonth: "1",
           endMonth: thismonth+1,
           type: "1",
@@ -84,7 +84,7 @@ export default {
               "计划完成率": json[2].planCompletion[2][i + "月份"]
             });
           }
-          //console.log(data);
+          console.log(data);
           this.data = data;
         })
         .then(() => {

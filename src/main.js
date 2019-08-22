@@ -6,6 +6,7 @@ import { LoadingPlugin ,AlertPlugin, ToastPlugin} from 'vux'
 Vue.use(LoadingPlugin)
 Vue.use(AlertPlugin)
 Vue.use(ToastPlugin , {position: 'middle',text:'请求失败',type:'text'})
+Vue.prototype.$devicePixelRatio = 2
 Vue.config.productionTip = false
 new Vue({
   router,

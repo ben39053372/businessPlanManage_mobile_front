@@ -3,7 +3,7 @@
     <card>
       <h4 slot="header">流程节点</h4>
 
-      <!-- 小流程圖 -->
+      <!-- 小流程圖
       <flow slot="content" v-if="!showContent001">
         <template v-for="(i, index) in flowChart">
           <flow-state :state="index + 1" :is-done="i.isDone" :key="'a1'+index"></flow-state>
@@ -14,7 +14,7 @@
             :key="'a2'+index"
           ></flow-line>
         </template>
-      </flow>
+      </flow> -->
 
       <!-- 大流程圖 -->
       <template slot="content" v-if="showContent001" id="box">

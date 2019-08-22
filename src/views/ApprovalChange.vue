@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :left-options="{backText: ''}">项目管理系统计画变更</x-header>
+    <x-header :left-options="{backText: ''}">项目管理系统计划变更</x-header>
 
     <!--
     <div class="paper">
@@ -116,7 +116,7 @@ export default {
       axios
         .get("http://172.30.215.95:8080/api/app/changePlan/"+this.$route.params.id)
         .then(res => {
-          console.log(res)
+          //console.log(res)
           this.$vux.loading.show({
             text: "Loading"
           });
@@ -129,7 +129,7 @@ export default {
             dept = dept.concat(resultList.relevanceDept[i].dept) + "/";
           }*/
           var dept = JSON.parse(resultList.relevanceDept)
-          console.log('dept:',dept)
+          //console.log('dept:',dept)
           var data = [
             { title: "申请单号", content: resultList.applicationCode },
             { title: "申请单位", content: resultList.applyDept },
@@ -163,7 +163,8 @@ export default {
           for (var i = 0; i < oldJsonDataList.length; i++) {
             if (
               typeof newJsonData[oldJsonDataList[i]] !=
-              "undefined" /** && newJsonData[oldJsonDataList[i]] != oldJsonData[oldJsonDataList[i]]*/
+              "undefined" 
+              && newJsonData[oldJsonDataList[i]] != oldJsonData[oldJsonDataList[i]]
             ) {
               change = change.concat({
                 title: etoc[oldJsonDataList[i]],
@@ -235,6 +236,7 @@ export default {
               }
             }
           }
+          console.log(flow)
           this.setFlowChart(flow);
           this.$vux.loading.hide();
           

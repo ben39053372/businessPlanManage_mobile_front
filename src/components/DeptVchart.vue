@@ -44,7 +44,7 @@ export default {
       var thismonth = new Date().getMonth();
       //console.log(thismonth + 1);
       axios
-        .post("http://172.30.215.96:8080/api/app/portal/getALLCompletionData", {
+        .post("http://172.30.210.229:8080/api/app/portal/getALLCompletionData", {
           startMonth: "1",
           endMonth: thismonth + 1,
           type: "1",
@@ -67,7 +67,7 @@ export default {
           chart.legend(false);
           data.map(function(obj) {
             chart.guide().text({
-              top:true,
+              top: true,
               position: [name, value],
               content: obj.value,
               style: {
@@ -77,18 +77,26 @@ export default {
               offsetY: 0
             });
           });
-
+          chart.axis("name", {
+            label: {
+              rotate: -Math.PI / 2,
+              textAlign: "end",
+              textBaseline: "middle"
+            }
+          });
           //畫棒
           chart
             .interval()
             .position("name*value")
             .color("name");
+          chart.legend;
           chart.render();
-          this.$vux.loading.hide()
+          this.$vux.loading.hide();
         })
         .catch(err => {
-          this.$vux.loading.hide()
-          this.$vux.toast.show()
+          this.$vux.loading.hide();
+          this.$vux.toast.show();
+          console.log(err);
         });
     }
   },
@@ -98,6 +106,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+canvas {
+  width: 200%;
+}
 </style>
 
