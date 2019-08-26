@@ -68,12 +68,13 @@ export default {
     ...mapMutations(["setSupervisorList"]),
     //督办事项分页查询
     updateSupervisorList() {
+      
       this.$vux.loading.show({
         text: "Loading"
       });
       axios
         .get(
-          "http://172.30.215.96:8080/api/app/superviseManageApp/findSuperviseManage/1/10"
+          "http://172.30.215.64:6502/businessplanmanage/api/app/superviseManageApp/findSuperviseManage/1/10"
         )
         .then(res => {
           var json = res.data.data.rows;

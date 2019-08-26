@@ -3,7 +3,6 @@
     <card>
       <cell slot="content" v-for="(item) in data" :key="item.id" :link="'http://juece.gacrnd.com:8088/?furl='+item.fileUrl">
         <p slot="title" style="font-size:20px">{{item.fileName}}</p>
-
       </cell>
     </card>
   </div>
@@ -42,7 +41,7 @@ export default {
         )
         .then(res => {
           var json = res.data.data;
-          console.log(res);
+          //console.log(res);
           this.data = json;
           this.$vux.loading.hide();
         })

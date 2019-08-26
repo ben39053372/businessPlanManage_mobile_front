@@ -74,7 +74,7 @@ export default {
       });
       axios
         .post(
-          "http://172.30.215.96:8080/api/app/superviseManageApp/saveIndicateMsg/" +
+          "http://172.30.215.64:6502/businessplanmanage/api/app/superviseManageApp/saveIndicateMsg/" +
             this.$route.params.id,
           {
             dutyPerson: this.dutyPerson,
@@ -98,22 +98,24 @@ export default {
         text: "Loading"
       });
       axios
-        .get("http://172.30.215.96:8080/api/app/superviseManageApp/"+this.$route.params.id)
+        .get("http://172.30.215.64:6502/businessplanmanage/api/app/superviseManageApp/"+this.$route.params.id)
         .then(res => {
-          //console.log(res.data.data);
+          console.log(res.data.data);
           var json = res.data.data;
           var dutyPerson = "";
-          for (var i = 0; i < json.dutyPerson.length; i++) {
-            dutyPerson += json.dutyPerson[i].label + json.dutyPerson[i].value;
-            if (i == json.dutyPerson.length - 1) {
+          var jsonDutyPerson = JSON.parse(json.dutyPerson)
+          for (var i = 0; i < jsonDutyPerson.length; i++) {
+            dutyPerson += jsonDutyPerson[i].label + jsonDutyPerson[i].value;
+            if (i == jsonDutyPerson.length - 1) {
               dutyPerson += "/";
             }
           }
           var windowPerson = "";
-          for (var i = 0; i < json.windowPerson.length; i++) {
-            dutyPerson +=
-              json.windowPerson[i].label + json.windowPerson[i].value;
-            if (i == json.windowPerson.length - 1 && i != 0) {
+          var jsonwindowPerson = Json.parse(json.windowPerson)
+          for (var i = 0; i < jsonwindowPerson.length; i++) {
+            windowPerson +=
+              jsonwindowPerson[i].label + jsonwindowPerson[i].value;
+            if (i == jsonwindowPerson.length - 1 && i != 0) {
               windowPerson += "/";
             }
           }

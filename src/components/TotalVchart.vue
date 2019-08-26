@@ -52,7 +52,7 @@ export default {
           depName: "全部"
         })
         .then(res => {
-          //console.log(res)
+          console.log(res)
           var json = res.data.data;
           //console.log('json',json);
 

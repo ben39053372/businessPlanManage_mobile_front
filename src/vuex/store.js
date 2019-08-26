@@ -7,6 +7,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
   state: {
+    //工號
+    userInfoCode:"gz00804",
+    //token
+    token:"",
+    //isLogin
+    isLogin:false,
+
     moredetail:[],
     baseurl: 'http://rap2api.taobao.org/app/mock/227201/api',
     baseurl1: 'http://172.30.215.254:8080/',

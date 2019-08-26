@@ -3,9 +3,6 @@
     <card>
       <cell slot="content" v-for="(item) in data" :key="item.id">
         <p slot="title" style="font-size:20px">{{item.fileName}}</p>
-        <p>上傳人: {{item.uploadAuthor}}</p>
-        <p>檔案大小: {{item.fileSize}}</p>
-        <p>上傳時間: {{item.uploadDate}}</p>
       </cell>
     </card>
   </div>
@@ -36,7 +33,7 @@ export default {
       //console.log("111");
       axios
         .post(
-          "http://172.30.215.96:8080/api/app/portal/getBusinessMonthReports",
+          "http://172.30.215.229:8080/api/app/portal/getBusinessMonthReports",
           {
             year: thisyear,
             type: 1

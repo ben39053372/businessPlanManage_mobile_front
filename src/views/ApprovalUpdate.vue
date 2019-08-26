@@ -12,7 +12,18 @@
     <div class="paper">
       <card>
         <h4 slot="header">进展消息</h4>
-        <img slot="content" width="100%" :src="this.imgSrc" />
+        <img
+          slot="content"
+          :key='index'
+          class="previewer-demo-img"
+          v-for="(item, index) in list"
+          :src="item.src"
+          width="100%"
+          @click="show(index)"
+        />
+        <div v-transfer-dom slot="content">
+          <previewer slot="content" :list="list" ref="previewer"></previewer>
+        </div>
       </card>
     </div>
 
@@ -48,11 +59,17 @@ import {
   Group,
   GroupTitle,
   XTextarea,
-  XHeader
+  XHeader,
+  Previewer,
+  TransferDom
 } from "vux";
 import axios from "axios";
 import FlowChart from "../components/FlowChart";
 import { mapState, mapMutations } from "vuex";
+var src = "http://img1.imgtn.bdimg.com/it/u=1737166424,3218475171&fm=26&gp=0.jpg"
+const list=[{
+  'src': src
+}]
 export default {
   components: {
     Flexbox,
@@ -63,18 +80,50 @@ export default {
     GroupTitle,
     XTextarea,
     FlowChart,
-    XHeader
+    XHeader,
+    Previewer
   },
   data() {
     return {
       msg: "",
-      imgSrc: "https://f11.baidu.com/it/u=2550844653,2528503954&fm=72"
+      src:"http://img1.imgtn.bdimg.com/it/u=1737166424,3218475171&fm=26&gp=0.jpg",
+      imgSrc:
+        "http://img1.imgtn.bdimg.com/it/u=1737166424,3218475171&fm=26&gp=0.jpg",
+      list,
+      options: {
+        getThumbBoundsFn(index) {
+          // find thumbnail element
+          let thumbnail = document.querySelectorAll(".previewer-demo-img")[
+            index
+          ];
+          // get window scroll Y
+          let pageYScroll =
+            window.pageYOffset || document.documentElement.scrollTop;
+          // optionally get horizontal scroll
+          // get position of element relative to viewport
+          let rect = thumbnail.getBoundingClientRect();
+          // w = width
+          return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
+          // Good guide on how to get element coordinates:
+          // http://javascript.info/tutorial/coordinates
+        }
+      }
     };
   },
   mounted() {
     this.fetchDataByPlanDeptAndMonth();
   },
+  directives: {
+    TransferDom
+  },
+
   methods: {
+    logIndexChange(arg) {
+      console.log(arg);
+    },
+    show(index) {
+      this.$refs.previewer.show(index);
+    },
     fetchDataByPlanDeptAndMonth() {
       this.$vux.loading.show({
         text: "Loading"
@@ -82,12 +131,15 @@ export default {
       //console.log(typeof(this.$route.params.planDep))
       //console.log(typeof(this.$route.params.month))
       axios
-        .post("http://172.30.215.96:8080/api/app/progressReportApp/getFlowDetailAndFileUrl", {
-          planDeptValue: this.$route.params.planDep,
-          month: parseInt(this.$route.params.month) 
-        })
+        .post(
+          "http://172.30.215.95:8080/api/app/progressReportApp/getFlowDetailAndFileUrl",
+          {
+            planDeptValue: this.$route.params.planDep,
+            month: parseInt(this.$route.params.month)
+          }
+        )
         .then(res => {
-          //console.log(res.data.data[0])
+          console.log(res.data.data[0]);
           var json = res.data.data[0];
           //console.log(json);
           //圖片連結
@@ -156,19 +208,22 @@ export default {
           this.setFlowChart(data);
           this.$vux.loading.hide();
         })
-        .catch(err=>{
-          this.$vux.loading.hide()
-          this.$vux.toast.show()
+        .catch(err => {
+          this.$vux.loading.hide();
+          this.$vux.toast.show();
         });
     },
     pass() {
       axios
-        .post("http://172.30.215.96:8080/api/app/progressReportApp/progressPorterApproval", {
-          status: 1,
-          type: 1,
-          planDeptValue: this.$route.params.planDep,
-          //msg: this.msg
-        })
+        .post(
+          "http://172.30.215.96:8080/api/app/progressReportApp/progressPorterApproval",
+          {
+            status: 1,
+            type: 1,
+            planDeptValue: this.$route.params.planDep
+            //msg: this.msg
+          }
+        )
         .then(res => {
           //console.log(this.$route.params.planDep, this.msg);
           //console.log(res);
@@ -180,12 +235,15 @@ export default {
     },
     dontpass() {
       axios
-        .post('http://172.30.215.96:8080/api/app/progressReportApp/progressPorterApproval', {
-          status: 0,
-          type: 1,
-          planDeptValue: this.$route.params.planDep,
-          //msg: this.msg
-        })
+        .post(
+          "http://172.30.215.96:8080/api/app/progressReportApp/progressPorterApproval",
+          {
+            status: 0,
+            type: 1,
+            planDeptValue: this.$route.params.planDep
+            //msg: this.msg
+          }
+        )
         .then(res => {
           //console.log(this.$route.params.planDep, this.msg);
           //console.log(res);

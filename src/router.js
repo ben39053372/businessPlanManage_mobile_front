@@ -9,6 +9,7 @@ import SupervisorTips from './views/SupervisorTips.vue'
 import HistoryMessage from './views/HistoryMesseage.vue'
 import BusinessReport from './views/BusinessReport.vue'
 import SupervisorReport from './views/SupervisorReport.vue'
+import test from './components/test.vue'
 
 Vue.use(Router)
 
@@ -55,6 +56,10 @@ export default new Router({
       path: '/SupervisorReport',
       name: 'superviosrReport',
       component: SupervisorReport
+    },{
+      path: '/test',
+      name: 'test',
+      component: test
     }
   ]
 })
