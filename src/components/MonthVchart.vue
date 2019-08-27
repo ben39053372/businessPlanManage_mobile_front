@@ -14,12 +14,10 @@ import {
   VAxis,
   VGuide,
   VTooltip,
-  VLegend,
-  Scroller
+  VLegend
 } from "vux";
 import axios from "axios";
 import { mapState, mapGetters } from "vuex";
-import { async, delay } from "q";
 
 const data = [];
 export default {
@@ -34,8 +32,7 @@ export default {
     VAxis,
     VGuide,
     VTooltip,
-    VLegend,
-    Scroller
+    VLegend
   },
   methods: {
     fetchData({ chart }) {
@@ -51,7 +48,7 @@ export default {
           depName: "全部"
         })
         .then(res => {
-          console.log(res)
+          //console.log(res)
           var json = res.data.data;
           //console.log(json);
 
@@ -84,7 +81,7 @@ export default {
               "计划完成率": json[2].planCompletion[2][i + "月份"]
             });
           }
-          console.log(data);
+          //console.log(data);
           this.data = data;
         })
         .then(() => {

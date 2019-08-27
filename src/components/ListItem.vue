@@ -71,42 +71,42 @@ export default {
           //待辦
           for (var i = 0; i < json.audit.auditComList.length; i++) {
             data = data.concat({
-              title: json.audit.auditComList[i].tital,
+              title: json.audit.auditComList[i].title,
               link:
                 "/approvalUpdate/" +
                 json.audit.auditComList[i].planDep +
                 "/" +
                 json.audit.auditComList[i].month +
                 "/" +
-                json.audit.auditComList[i].tital,
+                json.audit.auditComList[i].title,
               state: 0
             });
           }
           //跟蹤
           for (var i = 0; i < json.audit.auditFollowList.length; i++) {
             data = data.concat({
-              title: json.audit.auditFollowList[i].tital,
+              title: json.audit.auditFollowList[i].title,
               link:
                 "/approvalUpdate/" +
                 json.audit.auditFollowList[i].planDep +
                 "/" +
                 json.audit.auditFollowList[i].month +
                 "/" +
-                json.audit.auditFollowList[i].tital,
+                json.audit.auditFollowList[i].title,
               state: 1
             });
           }
           //已辦
           for (var i = 0; i < json.audit.auditFinList.length; i++) {
             data = data.concat({
-              title: json.audit.auditFinList[i].tital,
+              title: json.audit.auditFinList[i].title,
               link:
                 "/approvalUpdate/" +
                 json.audit.auditFinList[i].planDep +
                 "/" +
                 json.audit.auditFinList[i].month +
                 "/" +
-                json.audit.auditFinList[i].tital,
+                json.audit.auditFinList[i].title,
               state: 2
             });
           }

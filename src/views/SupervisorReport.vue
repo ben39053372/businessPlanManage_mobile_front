@@ -1,7 +1,7 @@
 <template>
   <div class="paper">
     <card>
-      <cell slot="content" v-for="(item) in data" :key="item.id">
+      <cell slot="content" v-for="(item) in data" :key="item.id" :link="'http://juece.gacrnd.com:8088/?furl='+item.fileUrl">
         <p slot="title" style="font-size:20px">{{item.fileName}}</p>
       </cell>
     </card>
@@ -33,7 +33,7 @@ export default {
       //console.log("111");
       axios
         .post(
-          "http://172.30.215.229:8080/api/app/portal/getBusinessMonthReports",
+          "http://172.30.210.229:8080/api/app/portal/getBusinessMonthReports",
           {
             year: thisyear,
             type: 1
@@ -41,7 +41,7 @@ export default {
         )
         .then(res => {
           var json = res.data.data;
-          //console.log(json);
+          //console.log(res);
           this.data = json;
           this.$vux.loading.hide();
         })
@@ -53,3 +53,6 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+</style>

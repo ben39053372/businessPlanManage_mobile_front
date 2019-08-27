@@ -65,11 +65,11 @@ export default {
             });
           }
           this.data = data;
-          console.log(this.data);
+          //console.log(this.data);
         })
         .then(() => {
           var data = this.data;
-          console.log(this.data)
+          //console.log(this.data)
           chart.source(this.data);
           chart.coord({
             transposed: true
@@ -89,7 +89,6 @@ export default {
 
           // 绘制文本
           data.map(function(obj) {
-            console.log("绘制文本");
             chart.guide().text({
               position: [obj.name, "min"],
               content: obj.name,

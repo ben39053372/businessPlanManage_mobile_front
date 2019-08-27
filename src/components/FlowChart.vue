@@ -67,7 +67,7 @@ export default {
     };
   },
   mounted(){
-    console.log('flowchartMount')
+    //console.log('flowchartMount')
   },
   components: {
     Card,

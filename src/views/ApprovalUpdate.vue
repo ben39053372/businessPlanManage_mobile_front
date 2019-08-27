@@ -14,7 +14,7 @@
         <h4 slot="header">进展消息</h4>
         <img
           slot="content"
-          :key='index'
+          :key="index"
           class="previewer-demo-img"
           v-for="(item, index) in list"
           :src="item.src"
@@ -66,10 +66,6 @@ import {
 import axios from "axios";
 import FlowChart from "../components/FlowChart";
 import { mapState, mapMutations } from "vuex";
-var src = "http://img1.imgtn.bdimg.com/it/u=1737166424,3218475171&fm=26&gp=0.jpg"
-const list=[{
-  'src': src
-}]
 export default {
   components: {
     Flexbox,
@@ -86,10 +82,11 @@ export default {
   data() {
     return {
       msg: "",
-      src:"http://img1.imgtn.bdimg.com/it/u=1737166424,3218475171&fm=26&gp=0.jpg",
-      imgSrc:
-        "http://img1.imgtn.bdimg.com/it/u=1737166424,3218475171&fm=26&gp=0.jpg",
-      list,
+      list: [
+        {
+          src: ''
+        }
+      ],
       options: {
         getThumbBoundsFn(index) {
           // find thumbnail element
@@ -139,12 +136,12 @@ export default {
           }
         )
         .then(res => {
-          console.log(res)
+          console.log(res);
           console.log(res.data.data[0]);
           var json = res.data.data[0];
           //console.log(json);
           //圖片連結
-          this.src = json.fileUrl;
+          this.list[0].src = json.fileUrl;
           var flowData = json.resultList;
           //console.log(flowData);
           var data = [];
