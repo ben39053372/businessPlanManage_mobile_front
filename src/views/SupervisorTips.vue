@@ -100,6 +100,7 @@ export default {
       axios
         .get("http://172.30.215.64:6502/businessplanmanage/api/app/superviseManageApp/"+this.$route.params.id)
         .then(res => {
+          console.log('res:',res)
           console.log(res.data.data);
           var json = res.data.data;
           var dutyPerson = "";
@@ -111,7 +112,7 @@ export default {
             }
           }
           var windowPerson = "";
-          var jsonwindowPerson = Json.parse(json.windowPerson)
+          var jsonwindowPerson = JSON.parse(json.windowPerson)
           for (var i = 0; i < jsonwindowPerson.length; i++) {
             windowPerson +=
               jsonwindowPerson[i].label + jsonwindowPerson[i].value;
@@ -138,6 +139,7 @@ export default {
           this.$vux.loading.hide();
         })
         .catch(err => {
+          console.log(err)
           this.$vux.loading.hide()
           this.$vux.toast.show()
         });

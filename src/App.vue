@@ -38,7 +38,7 @@ export default {
 
 <style>
 .tabbar{
-  margin:20px;
+  margin:10px;
   padding:10px;
   font-size:14px;
 }

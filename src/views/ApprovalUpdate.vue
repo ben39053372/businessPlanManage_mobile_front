@@ -139,11 +139,12 @@ export default {
           }
         )
         .then(res => {
+          console.log(res)
           console.log(res.data.data[0]);
           var json = res.data.data[0];
           //console.log(json);
           //圖片連結
-          this.imgSrc = json.fileUrl;
+          this.src = json.fileUrl;
           var flowData = json.resultList;
           //console.log(flowData);
           var data = [];
