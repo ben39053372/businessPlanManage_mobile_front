@@ -116,7 +116,7 @@ export default {
       axios
         .get("http://172.30.215.95:8080/api/app/changePlan/"+this.$route.params.id)
         .then(res => {
-          //console.log(res)
+          console.log(res)
           this.$vux.loading.show({
             text: "Loading"
           });

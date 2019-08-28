@@ -12,7 +12,6 @@ import TotalVchart from "./TotalVchart";
 import DeptVchart from "./DeptVchart";
 import axios from "axios";
 import { mapState, mapGetters } from "vuex";
-import { async, delay } from "q";
 
 const data = [];
 export default {

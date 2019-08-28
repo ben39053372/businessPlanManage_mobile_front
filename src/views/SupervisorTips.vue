@@ -6,6 +6,7 @@
         <li v-for="(item,index) in data" :key="index">
           <span style="color:#777">{{item.title}}</span>
           :
+          <br>
           <span style="font-size:18px">{{item.content}}</span>
         </li>
       </ul>
@@ -106,19 +107,13 @@ export default {
           var dutyPerson = "";
           var jsonDutyPerson = JSON.parse(json.dutyPerson)
           for (var i = 0; i < jsonDutyPerson.length; i++) {
-            dutyPerson += jsonDutyPerson[i].label + jsonDutyPerson[i].value;
-            if (i == jsonDutyPerson.length - 1) {
-              dutyPerson += "/";
-            }
+            dutyPerson += jsonDutyPerson[i].label + jsonDutyPerson[i].value+ ' ';
           }
           var windowPerson = "";
           var jsonwindowPerson = JSON.parse(json.windowPerson)
           for (var i = 0; i < jsonwindowPerson.length; i++) {
             windowPerson +=
-              jsonwindowPerson[i].label + jsonwindowPerson[i].value;
-            if (i == jsonwindowPerson.length - 1 && i != 0) {
-              windowPerson += "/";
-            }
+              jsonwindowPerson[i].label + jsonwindowPerson[i].value+ ' ';
           }
           //console.log("dutyPerson", dutyPerson);
           this.data = [

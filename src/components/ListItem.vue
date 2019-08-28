@@ -64,7 +64,7 @@ export default {
       axios
         .get("http://172.30.215.95:8080/api/app/changePlan/auditAndPlan")
         .then(res => {
-          //console.log(res);
+          console.log(res);
           var json = res.data.data;
           //console.log(json);
           var data = [];
@@ -163,6 +163,7 @@ export default {
           this.$vux.loading.hide();
         })
         .catch(err => {
+          console.log(err)
           this.$vux.loading.hide();
           this.$vux.toast.show();
         });

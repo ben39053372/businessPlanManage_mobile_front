@@ -55,7 +55,7 @@ export default {
         )
         .then(res => {
           var json = res.data.data;
-          //console.log(json);
+          console.log(json);
           var data = [];
           for (var i = 0; i < 7; i++) {
             data = data.concat({
