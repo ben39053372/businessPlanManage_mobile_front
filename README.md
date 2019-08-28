@@ -29,6 +29,7 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### web structure
+```
 App
  |-Home : 门户
     |--VChart
@@ -48,6 +49,7 @@ App
         |--(changed) : 项目变更
         |--(moreDetail) : 更多详情
         |--(flowCahrt) : 流程节点
+```        
 
 
 
