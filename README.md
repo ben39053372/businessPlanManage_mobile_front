@@ -45,14 +45,14 @@ App
  |     |--HistoryMessage : 历史意见
  |
  |-Approval : 审批待办
- |   |--(listItem)
- |     |--ApprovalUpdate : 进展更新
- |     |  |--(flowChart) : 流程节点
- |     |
- |     |--ApprovalChange : 计划变更
- |       |--(changed) : 项目变更
- |       |--(moreDetail) : 更多详情
- |       |--(flowCahrt) : 流程节点
+    |--(listItem)
+      |--ApprovalUpdate : 进展更新
+      |  |--(flowChart) : 流程节点
+      |
+      |--ApprovalChange : 计划变更
+        |--(changed) : 项目变更
+        |--(moreDetail) : 更多详情
+        |--(flowCahrt) : 流程节点
 ```        
 
 
